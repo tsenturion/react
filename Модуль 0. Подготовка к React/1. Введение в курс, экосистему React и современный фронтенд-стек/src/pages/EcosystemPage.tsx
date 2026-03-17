@@ -7,10 +7,12 @@ import {
   Panel,
   ProjectStudy,
   SectionIntro,
+  StatusPill,
 } from '../components/ui';
 import {
   artifactChecks,
   ecosystemLayers,
+  ecosystemReferencePoints,
   ecosystemTasks,
 } from '../lib/learning-model';
 import { ecosystemStudy } from '../lib/project-study';
@@ -18,26 +20,32 @@ import { ecosystemStudy } from '../lib/project-study';
 export function EcosystemPage() {
   const [taskId, setTaskId] = useState(ecosystemTasks[0].id);
   const [artifactId, setArtifactId] = useState(artifactChecks[1].id);
+  const [referencePointId, setReferencePointId] = useState(ecosystemReferencePoints[1].id);
 
   // Страница хранит только выбранные ids, а сами сценарии и артефакты
   // достаются из предметной модели. Так UI остаётся декларативным.
   const task = ecosystemTasks.find((item) => item.id === taskId) ?? ecosystemTasks[0];
   const artifact =
     artifactChecks.find((item) => item.id === artifactId) ?? artifactChecks[0];
+  // Эта привязка нужна, чтобы именованные стартовые точки вроде Vite или Next.js
+  // читались через ту же карту экосистемы, а не как отдельный "список терминов".
+  const referencePoint =
+    ecosystemReferencePoints.find((item) => item.id === referencePointId) ??
+    ecosystemReferencePoints[0];
 
   return (
     <div className="space-y-6">
       <SectionIntro
         eyebrow="Лаборатория 1"
         title="Карта экосистемы React и современного фронтенд-стека"
-        copy="Здесь вы перестаёте воспринимать React как изолированную библиотеку. Вы видите реальные роли браузера, DOM, JavaScript, Node.js, npm, Vite, роутера, framework-first слоя и Docker."
+        copy="Здесь вы перестаёте воспринимать React как изолированную библиотеку. Вы видите реальные роли браузера, DOM, JavaScript, Node.js, npm, Vite, React Router, React Router framework mode, Next.js, full-stack React и Docker."
         aside={
           <div className="space-y-3">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
               Результат обучения
             </p>
             <p className="text-sm leading-6 text-slate-700">
-              После этой страницы вы ясно видите, где именно выполняется код, почему CRA больше не считается базовой отправной точкой и как Vite/Router/framework занимают разные уровни системы.
+              После этой страницы вы ясно видите, где именно выполняется код, почему CRA больше не считается базовой отправной точкой и как Vite, React Router framework mode и Next.js занимают разные уровни общей системы.
             </p>
           </div>
         }
@@ -202,6 +210,85 @@ export function EcosystemPage() {
         </div>
       </Panel>
 
+      <Panel>
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+              Именованные стартовые точки
+            </p>
+            <h2 className="mt-2 text-xl font-bold tracking-tight text-slate-950">
+              Где находятся CRA, Vite, React Router framework mode и Next.js
+            </h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
+              Здесь вы переключаете реальные инструменты и подходы, которые встречаются в документации и проектах. Так становится видно, что CRA, Vite и framework-first решения занимают не одно и то же место.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {ecosystemReferencePoints.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setReferencePointId(item.id)}
+                className={`chip ${item.id === referencePoint.id ? 'chip-active' : ''}`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
+          <div className="rounded-[28px] border border-black/10 bg-white/60 p-5">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                  Выбранная точка
+                </p>
+                <h3 className="mt-2 text-xl font-bold tracking-tight text-slate-950">
+                  {referencePoint.label}
+                </h3>
+              </div>
+              <StatusPill tone={referencePoint.tone}>{referencePoint.status}</StatusPill>
+            </div>
+            <p className="mt-4 text-sm leading-6 text-slate-700">
+              {referencePoint.summary}
+            </p>
+            <p className="mt-3 rounded-[22px] bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-600">
+              {referencePoint.layerNote}
+            </p>
+
+            <div className="mt-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                Активные слои карты
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {referencePoint.activeLayers.map((layerId) => {
+                  const layer = ecosystemLayers.find((item) => item.id === layerId);
+
+                  return (
+                    <span
+                      key={layerId}
+                      className="rounded-full border border-black/10 bg-white px-3 py-1 text-sm font-medium text-slate-700"
+                    >
+                      {layer?.title ?? layerId}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          <ListBlock
+            title="Практическая рамка"
+            items={[
+              `Когда уместно: ${referencePoint.whenUseful}`,
+              `Что не путать: ${referencePoint.watchOut}`,
+              'Текущий учебный проект сам намеренно остаётся на стороне Vite SPA, чтобы client-side pipeline было видно без скрытого framework-слоя.',
+            ]}
+          />
+        </div>
+      </Panel>
+
       <Panel className="grid gap-6 xl:grid-cols-2">
         <ListBlock title="Почему это важно" items={task.whyItMatters} />
         <ListBlock
@@ -209,6 +296,7 @@ export function EcosystemPage() {
           items={[
             'React сам по себе не заменяет браузер, Node.js, npm и сборщик. Он живёт внутри большей системы.',
             'Современный frontend-стек важен не ради моды, а потому что он закрывает реальные инженерные задачи: transform, deps, build, routing, delivery.',
+            'CRA полезно знать как часть истории экосистемы, но современную стартовую картину здесь задают Vite и framework-first решения.',
             'Понимание этой карты нужно до изучения JSX, state и hooks, иначе многие ошибки будут казаться случайными.',
           ]}
         />

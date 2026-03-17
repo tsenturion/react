@@ -9,50 +9,54 @@ import {
   StatusPill,
 } from '../components/ui';
 import {
-  buildDockerPreview,
+  buildIndexHtmlPreview,
   buildPackagePreview,
-  collectToolingDiagnostics,
-  runToolingCommand,
-  type ToolingCommandId,
-  type ToolingConfig,
+  collectWorkspaceDiagnostics,
+  runWorkspaceCommand,
+  type WorkspaceCommandId,
+  type WorkspaceConfig,
 } from '../lib/learning-model';
-import { toolingStudy } from '../lib/project-study';
-import { stackVersions } from '../lib/stack-meta';
+import { workspaceStudy } from '../lib/project-study';
 
-const baseConfig: ToolingConfig = {
-  nodeVersion: 20,
+const baseConfig: WorkspaceConfig = {
+  nodeVersion: 24,
+  hasLockfile: true,
   hasDevScript: true,
   hasBuildScript: true,
+  hasPreviewScript: true,
   hasTestScript: true,
-  hasReactDep: true,
+  hasLintScript: true,
+  hasFormatScript: true,
+  hasModuleType: true,
+  hasReactDeps: true,
   hasViteDep: true,
-  hasRouterDep: true,
-  hasVitestDep: true,
-  // Стартовое состояние совпадает с текущим учебным проектом:
-  // это Vite SPA с клиентским React Router и общим layout.
-  usesRouter: true,
-  envPrefixOk: true,
-  importCaseMatches: true,
-  dockerSpaFallback: true,
+  hasTypeScript: true,
+  hasEntryHtml: true,
+  rootIdMatches: true,
+  hasEslintConfig: true,
+  hasPrettierConfig: true,
 };
 
-const commandButtons: { id: ToolingCommandId; label: string }[] = [
+const commandButtons: { id: WorkspaceCommandId; label: string }[] = [
+  { id: 'install', label: 'npm install' },
   { id: 'dev', label: 'npm run dev' },
   { id: 'build', label: 'npm run build' },
+  { id: 'preview', label: 'npm run preview' },
+  { id: 'lint', label: 'npm run lint' },
+  { id: 'format-check', label: 'npm run format:check' },
   { id: 'test', label: 'npm test' },
-  { id: 'docker', label: 'docker run' },
 ];
 
-export function ToolingPage() {
-  const [config, setConfig] = useState<ToolingConfig>(baseConfig);
-  const [command, setCommand] = useState<ToolingCommandId>('dev');
+export function PackageScriptsPage() {
+  const [config, setConfig] = useState<WorkspaceConfig>(baseConfig);
+  const [command, setCommand] = useState<WorkspaceCommandId>('dev');
 
-  // И диагностика, и "вывод терминала" строятся из одной конфигурации.
-  // Это делает лабораторию тестируемой и не привязывает правила к JSX-разметке.
-  const diagnostics = collectToolingDiagnostics(config);
-  const result = runToolingCommand(config, command);
+  // manifest-конфиг и результат команды считаются отдельно от JSX, чтобы эта
+  // лаборатория оставалась моделью проекта, а не россыпью условий в разметке.
+  const diagnostics = collectWorkspaceDiagnostics(config);
+  const result = runWorkspaceCommand(config, command);
 
-  const toggle = (key: keyof ToolingConfig) => {
+  const toggle = (key: keyof WorkspaceConfig) => {
     setConfig((current) => ({
       ...current,
       [key]: typeof current[key] === 'boolean' ? !current[key] : current[key],
@@ -62,9 +66,9 @@ export function ToolingPage() {
   return (
     <div className="space-y-6">
       <SectionIntro
-        eyebrow="Лаборатория 5"
-        title="Node.js, npm, scripts, тесты и Docker как часть React-проекта"
-        copy="Последняя часть вводной темы переводит разговор в инженерную плоскость. React-приложение ценно не только как UI, но и как воспроизводимая система: со scripts, проверками, production build и контейнеризацией."
+        eyebrow="Лаборатория 2"
+        title="package.json, scripts и стартовая HTML-цепочка"
+        copy="Эта лаборатория показывает, что React-проект стартует не только из `src`, но и из manifest, `type: module`, lockfile, entry HTML, scripts и конфигов качества. Вы меняете состав проекта и сразу смотрите, как ведут себя команды."
       />
 
       <Panel>
@@ -75,14 +79,14 @@ export function ToolingPage() {
                 Версия Node.js
               </p>
               <div className="mt-3 grid grid-cols-4 gap-2">
-                {[16, 18, 20, 22].map((version) => (
+                {[16, 18, 20, 24].map((version) => (
                   <button
                     key={version}
                     type="button"
                     onClick={() =>
                       setConfig((current) => ({
                         ...current,
-                        nodeVersion: version as ToolingConfig['nodeVersion'],
+                        nodeVersion: version as WorkspaceConfig['nodeVersion'],
                       }))
                     }
                     className={`rounded-2xl border px-3 py-3 text-sm font-semibold ${
@@ -95,32 +99,29 @@ export function ToolingPage() {
                   </button>
                 ))}
               </div>
-              <p className="mt-3 text-sm leading-6 text-slate-600">
-                В этой версии проекта{' '}
-                <span className="font-semibold text-slate-900">
-                  Vite {stackVersions.vite}
-                </span>{' '}
-                считается рабочим на Node `20` и `22`. Значения `16` и `18`
-                здесь показывают устаревшее окружение и типичный отказ toolchain.
-              </p>
             </div>
 
             <div className="space-y-2">
               {[
+                ['hasLockfile', 'Есть package-lock.json'],
                 ['hasDevScript', 'Есть `dev` script'],
                 ['hasBuildScript', 'Есть `build` script'],
+                ['hasPreviewScript', 'Есть `preview` script'],
                 ['hasTestScript', 'Есть `test` script'],
-                ['hasReactDep', 'React установлен'],
-                ['hasViteDep', 'Vite установлен'],
-                ['hasRouterDep', 'Роутер установлен'],
-                ['hasVitestDep', 'Vitest установлен'],
-                ['usesRouter', 'Приложение использует роутинг'],
-                ['envPrefixOk', 'Клиентские env имеют `VITE_`'],
-                ['importCaseMatches', 'Регистры путей совпадают'],
-                ['dockerSpaFallback', 'Docker-сервер умеет SPA fallback'],
+                ['hasLintScript', 'Есть `lint` script'],
+                ['hasFormatScript', 'Есть `format:check` script'],
+                ['hasModuleType', 'package.json содержит `type: module`'],
+                ['hasReactDeps', 'React указан в dependencies'],
+                ['hasViteDep', 'Vite указан в devDependencies'],
+                ['hasTypeScript', 'TypeScript подключён'],
+                ['hasEntryHtml', 'index.html содержит `type="module"` entry script'],
+                ['rootIdMatches', 'root id совпадает с main.tsx'],
+                ['hasEslintConfig', 'eslint config есть в проекте'],
+                ['hasPrettierConfig', 'prettier config есть в проекте'],
               ].map(([key, label]) => {
-                const typedKey = key as keyof ToolingConfig;
+                const typedKey = key as keyof WorkspaceConfig;
                 const active = Boolean(config[typedKey]);
+
                 return (
                   <button
                     key={key}
@@ -177,37 +178,43 @@ export function ToolingPage() {
             </div>
 
             <div className="grid gap-4 xl:grid-cols-2">
-              <CodeBlock label="package.json preview" code={buildPackagePreview(config)} />
-              <CodeBlock label="nginx/docker preview" code={buildDockerPreview(config)} />
+              <CodeBlock
+                label="package.json preview"
+                code={buildPackagePreview(config)}
+              />
+              <CodeBlock
+                label="index.html preview"
+                code={buildIndexHtmlPreview(config)}
+              />
             </div>
           </div>
         </div>
       </Panel>
 
-      <Panel className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
+      <Panel className="grid gap-6 xl:grid-cols-2">
         <ListBlock
           title="Живые диагностики"
           items={
             diagnostics.length > 0
               ? diagnostics.map(
-                  (item) =>
-                    `${item.title}: ${item.message} Исправление: ${item.fix}`,
+                  (item) => `${item.title}: ${item.message} Исправление: ${item.fix}`,
                 )
-              : ['Конфигурация выглядит согласованной: локальный запуск, build, tests и Docker работают как единая система.']
+              : ['Manifest, scripts и стартовая HTML-цепочка согласованы между собой.']
           }
         />
         <ListBlock
-          title="Почему это часть вводной темы"
+          title="Что именно раскрывает эта страница"
           items={[
-            'Node.js и npm нужны не как фон, а как обязательная часть современного React workflow.',
-            'Scripts переводят знания из "я помню команду" в воспроизводимый проект.',
-            'Docker и тесты показывают, что современный frontend это не только UI, но и инженерная дисциплина.',
+            'Manifest и scripts — это не бюрократия, а реальный контракт запуска проекта.',
+            '`package.json` с `type: module` и `index.html` с `script type="module"` собирают ES-модульный старт проекта.',
+            'index.html и src/main.tsx образуют фактический entry-point в браузер.',
+            'Lockfile, lint и format-слои — это часть устройства проекта, а не внешние украшения.',
           ]}
         />
       </Panel>
 
       <Panel>
-        <ProjectStudy files={toolingStudy.files} snippets={toolingStudy.snippets} />
+        <ProjectStudy files={workspaceStudy.files} snippets={workspaceStudy.snippets} />
       </Panel>
     </div>
   );

@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   analyzePipeline,
   analyzeReactValue,
+  ecosystemReferencePoints,
   recommendDeliveryModes,
   runToolingCommand,
   type ToolingConfig,
@@ -24,6 +25,22 @@ describe('learning model', () => {
     ]);
 
     expect(recommendation.winner.id).toBe('vite-spa');
+  });
+
+  it('keeps CRA, Vite and framework-first tools explicit on the ecosystem map', () => {
+    const ids = ecosystemReferencePoints.map((item) => item.id);
+    const cra = ecosystemReferencePoints.find((item) => item.id === 'cra');
+
+    expect(ids).toEqual(
+      expect.arrayContaining([
+        'cra',
+        'vite',
+        'react-router-framework',
+        'nextjs',
+        'full-stack-react',
+      ]),
+    );
+    expect(cra?.tone).toBe('warn');
   });
 
   it('shows React value growing with complexity', () => {

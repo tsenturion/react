@@ -10,8 +10,10 @@ export type EcosystemLayerId =
   | 'node'
   | 'npm'
   | 'vite'
-  | 'router'
-  | 'framework'
+  | 'react-router'
+  | 'react-router-framework'
+  | 'nextjs'
+  | 'full-stack-react'
   | 'docker';
 
 export interface EcosystemLayer {
@@ -29,8 +31,10 @@ export const ecosystemLayers: EcosystemLayer[] = [
   { id: 'node', title: 'Node.js', zone: 'tooling', short: 'Исполняет dev-серверы, сборку, тесты и CLI-инструменты.' },
   { id: 'npm', title: 'npm', zone: 'tooling', short: 'Каталог пакетов и пакетный менеджер вокруг экосистемы.' },
   { id: 'vite', title: 'Vite', zone: 'tooling', short: 'Делает dev server, HMR и production build.' },
-  { id: 'router', title: 'Router', zone: 'architecture', short: 'Разбивает приложение на экраны и URL-сценарии.' },
-  { id: 'framework', title: 'Framework', zone: 'architecture', short: 'Даёт SSR, server data и full-stack структуру.' },
+  { id: 'react-router', title: 'React Router', zone: 'architecture', short: 'Даёт клиентский роутинг и data APIs поверх React-экранов.' },
+  { id: 'react-router-framework', title: 'React Router framework mode', zone: 'architecture', short: 'Поднимает React Router до framework-уровня: routes, loaders/actions, bundling и server/client границы.' },
+  { id: 'nextjs', title: 'Next.js', zone: 'architecture', short: 'Full-stack React framework с App Router, серверным рендерингом и server features.' },
+  { id: 'full-stack-react', title: 'Full-stack React', zone: 'architecture', short: 'Архитектурный слой, где React работает вместе с маршрутизацией, данными и сервером.' },
   { id: 'docker', title: 'Docker', zone: 'tooling', short: 'Упаковывает приложение и среду запуска в воспроизводимый образ.' },
 ];
 
@@ -122,16 +126,16 @@ export const ecosystemTasks: EcosystemTask[] = [
     id: 'client-routing',
     title: 'Добавить навигацию без полной перезагрузки',
     prompt: 'Интерфейс разрастается и его нужно разделить на экраны.',
-    activeLayers: ['react', 'router', 'browser', 'javascript', 'vite'],
+    activeLayers: ['react', 'react-router', 'browser', 'javascript', 'vite'],
     runtimes: [
       { id: 'browser', label: 'Browser', detail: 'Адрес меняется без полной загрузки новой HTML-страницы.' },
       { id: 'build', label: 'Bundler', detail: 'Маршруты и чанки связываются в единое SPA-приложение.' },
     ],
     before: 'Можно подумать, что роутинг сам по себе уже означает full-stack приложение.',
-    after: 'Клиентский роутер управляет экранами в браузере, но не добавляет автоматически SSR и серверные data APIs.',
+    after: 'Клиентский React Router управляет экранами в браузере, но не добавляет автоматически SSR и framework-level server data.',
     whyItMatters: [
       'Это помогает не путать SPA-роутинг с framework-first архитектурой.',
-      'Становится яснее, зачем для сложных data flows иногда нужен уже не только Vite, но и framework.',
+      'Становится яснее, зачем для сложных data flows иногда нужен уже не только Vite, а React Router framework mode или Next.js.',
     ],
     mistakes: [
       'Путать клиентский роутинг с серверным рендерингом.',
@@ -142,19 +146,26 @@ export const ecosystemTasks: EcosystemTask[] = [
     id: 'server-rendering',
     title: 'Нужны SSR, loader/action или server functions',
     prompt: 'Проект требует не только клиентский UI, но и серверный слой в той же архитектуре.',
-    activeLayers: ['framework', 'react', 'router', 'node', 'browser'],
+    activeLayers: [
+      'full-stack-react',
+      'react',
+      'react-router-framework',
+      'nextjs',
+      'node',
+      'browser',
+    ],
     runtimes: [
       { id: 'server', label: 'Server runtime', detail: 'Часть React-логики и загрузки данных выполняется на сервере.' },
       { id: 'browser', label: 'Browser', detail: 'Клиент гидрирует интерфейс и продолжает взаимодействие.' },
     ],
     before: 'Легко ожидать, что Vite сам превратит SPA в full-stack решение.',
-    after: 'Для SSR и server data нужен framework-first слой, который управляет маршрутизацией, сервером и границами client/server.',
+    after: 'Для SSR и server data нужен full-stack React слой: например, React Router framework mode или Next.js, а не только Vite SPA.',
     whyItMatters: [
       'Это помогает выбрать правильный уровень абстракции до того, как приложение перерастёт простой SPA.',
       'Понимание границ client/server уменьшает архитектурные тупики.',
     ],
     mistakes: [
-      'Думать, что SSR появляется автоматически после подключения React Router.',
+      'Думать, что SSR появляется автоматически после подключения клиентского React Router к Vite-приложению.',
       'Смешивать клиентские `useEffect`-запросы и полноценную серверную стратегию данных.',
     ],
   },
@@ -223,6 +234,112 @@ export const artifactChecks: ArtifactCheck[] = [
     directOwner: 'Docker вообще вне браузера и даже вне React.',
     needsStep: 'Он описывает, как собрать и запустить приложение как инженерную систему.',
     practice: 'Важно для CI/CD, повторяемости окружения и корректного деплоя SPA.',
+  },
+];
+
+export type EcosystemReferencePointId =
+  | 'cra'
+  | 'vite'
+  | 'react-router-framework'
+  | 'nextjs'
+  | 'full-stack-react';
+
+export interface EcosystemReferencePoint {
+  id: EcosystemReferencePointId;
+  label: string;
+  tone: StatusTone;
+  status: string;
+  summary: string;
+  layerNote: string;
+  activeLayers: EcosystemLayerId[];
+  whenUseful: string;
+  watchOut: string;
+}
+
+// Эти точки входа нужны не для "справочника названий", а чтобы наглядно показать,
+// где именно сегодня располагаются Vite, framework mode и Next.js относительно React.
+export const ecosystemReferencePoints: EcosystemReferencePoint[] = [
+  {
+    id: 'cra',
+    label: 'Create React App (CRA)',
+    tone: 'warn',
+    status: 'Legacy стартовая точка',
+    summary:
+      'CRA исторически важен, но для новых приложений и нового обучения больше не считается базовой отправной точкой.',
+    layerNote:
+      'Это старый scaffolding-подход вокруг React, Node.js и npm. Он не объясняет современную картину так прозрачно, как Vite и framework-first инструменты.',
+    activeLayers: ['react', 'node', 'npm'],
+    whenUseful:
+      'Полезно узнавать его при чтении старых codebase и миграциях, где CRA уже присутствует.',
+    watchOut:
+      'Не путайте поддержку старого проекта с выбором стартовой точки для нового приложения или нового курса.',
+  },
+  {
+    id: 'vite',
+    label: 'Vite',
+    tone: 'success',
+    status: 'Основная client-side отправная точка',
+    summary:
+      'Vite закрывает современный React pipeline для клиентского приложения: dev server, transform, npm-граф, HMR и production build.',
+    layerNote:
+      'Это build tool и dev toolchain, а не full-stack framework. Он живёт между исходниками и браузером.',
+    activeLayers: ['vite', 'node', 'npm', 'react', 'browser'],
+    whenUseful:
+      'Подходит для изучения React, для SPA, админок, кабинетов и интерфейсов, где не требуется framework-level server layer.',
+    watchOut:
+      'Не ожидайте от Vite встроенный SSR, route loaders, server actions или App Router только потому, что проект уже собран современным toolchain.',
+  },
+  {
+    id: 'react-router-framework',
+    label: 'React Router framework mode',
+    tone: 'success',
+    status: 'Framework-first вариант на базе React Router',
+    summary:
+      'Framework mode поднимает React Router выше клиентского роутинга и связывает маршруты, данные, server/client границы и build-процесс в единую систему.',
+    layerNote:
+      'Это уже не просто SPA-router. Здесь React Router становится частью full-stack React архитектуры.',
+    activeLayers: [
+      'react-router-framework',
+      'react-router',
+      'full-stack-react',
+      'react',
+      'node',
+      'browser',
+    ],
+    whenUseful:
+      'Подходит, когда нужны route-level data, формы и мутации через серверный слой, SSR или более цельная архитектура вокруг маршрутов.',
+    watchOut:
+      'Не путайте framework mode с обычным подключением `react-router-dom` внутри Vite SPA: уровень абстракции и ответственности здесь выше.',
+  },
+  {
+    id: 'nextjs',
+    label: 'Next.js App Router',
+    tone: 'success',
+    status: 'Full-stack React framework',
+    summary:
+      'Next.js располагается в той же framework-first зоне: React здесь работает вместе с маршрутизацией, серверным рендерингом, серверными функциями и стратегиями доставки.',
+    layerNote:
+      'Это не build tool вместо Vite, а более высокий full-stack слой со своей архитектурой и runtime-моделью.',
+    activeLayers: ['nextjs', 'full-stack-react', 'react', 'node', 'browser'],
+    whenUseful:
+      'Подходит для гибридного рендеринга, SEO-нагруженных приложений и продуктовых систем, где клиент и сервер проектируются как единая платформа.',
+    watchOut:
+      'Не стоит выбирать Next.js только из-за слова "framework": если задача чисто клиентская, этот слой может быть избыточен.',
+  },
+  {
+    id: 'full-stack-react',
+    label: 'Full-stack React',
+    tone: 'success',
+    status: 'Архитектурная зона, а не один пакет',
+    summary:
+      'Full-stack React означает не конкретную библиотеку, а класс решений, где React связан с роутингом, сервером, загрузкой данных и delivery-стратегией.',
+    layerNote:
+      'На этой карте Vite находится ниже как build tool, а React Router framework mode и Next.js находятся внутри этой более высокой архитектурной зоны.',
+    activeLayers: ['full-stack-react', 'react', 'node', 'browser'],
+    whenUseful:
+      'Важно держать эту рамку в голове, когда требования выходят за пределы чистого client-side SPA.',
+    watchOut:
+      'Не используйте термин "full-stack React" как синоним любого React-проекта: большинство проектов начинают с более простого client-side слоя.',
   },
 ];
 
@@ -395,10 +512,10 @@ export interface PipelineModeOption {
 }
 
 export const pipelineModes: PipelineModeOption[] = [
-  { id: 'no-build', label: 'No build', hint: 'Почти чистый браузерный runtime без слоя сборки.' },
-  { id: 'vite-dev', label: 'Vite dev', hint: 'Dev server, transform, HMR и быстрый feedback loop.' },
-  { id: 'vite-build', label: 'Vite build', hint: 'Production pipeline: чанки, минификация и ассеты.' },
-  { id: 'framework-first', label: 'Framework-first', hint: 'Маршруты, данные и серверные возможности как часть платформы.' },
+  { id: 'no-build', label: 'No-build / script tag', hint: 'Почти чистый браузерный runtime без современного build-слоя.' },
+  { id: 'vite-dev', label: 'Vite dev server', hint: 'Dev server, transform, HMR и быстрый feedback loop.' },
+  { id: 'vite-build', label: 'Vite production build', hint: 'Production pipeline: чанки, минификация и ассеты.' },
+  { id: 'framework-first', label: 'Framework-first (React Router / Next.js)', hint: 'Маршруты, данные и серверные возможности как часть full-stack платформы.' },
 ];
 
 export type PipelineFeatureId =
@@ -624,7 +741,7 @@ export function analyzePipeline(
     mistakes: [
       'Смешивать возможности браузера и возможности build tool.',
       'Диагностировать runtime-ошибку как "ошибку React", хотя причина в импортe или конфигурации сборки.',
-      'Ожидать SSR и server data только от наличия React Router в SPA.',
+      'Ожидать framework-level SSR и server data только от наличия клиентского React Router внутри SPA.',
     ],
     importance: [
       'Это напрямую помогает читать stack traces и понимать, где сломалось: в коде, в инструментах или в архитектурном выборе.',
@@ -765,11 +882,12 @@ function scoreDeliveryMode(
     },
     'framework-first': {
       id: 'framework-first',
-      label: 'Framework-first',
+      label: 'Framework-first (React Router / Next.js)',
       score: scores['framework-first'],
       summary: 'Нужен там, где React уже часть большей платформы: SSR, серверные данные, роуты и мутации как системная архитектура.',
       strengths: [
         'Даёт цельный full-stack workflow и сильнее связывает маршруты, данные и сервер.',
+        'Сюда относятся React Router framework mode и Next.js App Router как реальные современные стартовые точки.',
         'Лучше подходит для SEO, гибридного рендеринга и долгоживущих продуктовых систем.',
       ],
       cautions: [
@@ -932,7 +1050,7 @@ export function runToolingCommand(
       return {
         status: 'error',
         title: 'Роутер заявлен в коде, но не установлен',
-        lines: ['> npm run dev', "Cannot find package 'react-router-dom' imported by src/main.tsx"],
+        lines: ['> npm run dev', "Cannot find package 'react-router-dom' imported by route-aware module"],
         fix: 'Установить пакет роутера и обновить lockfile.',
       };
     }
@@ -944,7 +1062,7 @@ export function runToolingCommand(
         : 'Dev server запущен корректно',
       lines: [
         '> npm run dev',
-        'VITE v6 ready in 220 ms',
+        `VITE v${stackVersions.vite} ready in 220 ms`,
         config.envPrefixOk
           ? 'browser: app loaded with HMR and env configuration'
           : 'browser: app loaded, but import.meta.env.VITE_* is missing for one of the values',
@@ -978,7 +1096,7 @@ export function runToolingCommand(
       return {
         status: 'error',
         title: 'Код зависит от роутера, которого нет в проекте',
-        lines: ['> npm run build', "error: failed to resolve import 'react-router-dom'"],
+        lines: ['> npm run build', "error: failed to resolve import 'react-router-dom' from route-aware module"],
         fix: 'Добавить `react-router-dom` в dependencies.',
       };
     }
@@ -1070,7 +1188,9 @@ export function buildPackagePreview(config: ToolingConfig): string {
   const dependencies = [
     config.hasReactDep ? `    "react": "${stackVersions.react}",` : null,
     config.hasReactDep ? `    "react-dom": "${stackVersions.reactDom}",` : null,
-    config.hasRouterDep ? '    "react-router-dom": "^7.0.0",' : null,
+    config.hasRouterDep
+      ? `    "react-router-dom": "${stackVersions.reactRouterDom}",`
+      : null,
   ]
     .filter(Boolean)
     .join('\n');

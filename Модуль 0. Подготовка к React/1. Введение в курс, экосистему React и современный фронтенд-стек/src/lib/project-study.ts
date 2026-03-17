@@ -22,11 +22,15 @@ export const ecosystemStudy: StudyMaterial = {
     },
     {
       path: 'src/lib/learning-model.ts',
-      note: 'Откройте `ecosystemLayers`, `ecosystemTasks` и `artifactChecks`: именно эти структуры описывают карту экосистемы.',
+      note: 'Откройте `ecosystemLayers`, `ecosystemTasks`, `artifactChecks` и `ecosystemReferencePoints`: именно эти структуры описывают карту экосистемы и современные стартовые точки.',
     },
     {
       path: 'src/App.tsx',
-      note: 'Здесь видно, как лаборатория встраивается в общий one-page shell проекта.',
+      note: 'Здесь видно, как общий layout проекта работает вместе с NavLink и Outlet.',
+    },
+    {
+      path: 'src/router.tsx',
+      note: 'Здесь собраны реальные маршруты лабораторий и redirect на стартовую страницу.',
     },
     {
       path: 'README.md',
@@ -42,8 +46,35 @@ export const ecosystemStudy: StudyMaterial = {
         "  { id: 'browser', title: 'Браузер', zone: 'browser', short: 'Показывает интерфейс и выполняет клиентский JS.' },",
         "  { id: 'react', title: 'React', zone: 'architecture', short: 'Декларативный слой описания UI из компонентов.' },",
         "  { id: 'vite', title: 'Vite', zone: 'tooling', short: 'Делает dev server, HMR и production build.' },",
-        "  { id: 'framework', title: 'Framework', zone: 'architecture', short: 'Даёт SSR, server data и full-stack структуру.' },",
+        "  { id: 'react-router-framework', title: 'React Router framework mode', zone: 'architecture', short: 'Поднимает React Router до framework-уровня.' },",
+        "  { id: 'nextjs', title: 'Next.js', zone: 'architecture', short: 'Full-stack React framework с App Router и server features.' },",
+        "  { id: 'full-stack-react', title: 'Full-stack React', zone: 'architecture', short: 'Зона, где React работает вместе с сервером и данными.' },",
         '];',
+      ].join('\n'),
+    },
+    {
+      label: 'src/lib/learning-model.ts',
+      note: 'CRA, Vite, React Router framework mode и Next.js зафиксированы как отдельные референсные точки, а не спрятаны в тексте страницы.',
+      code: [
+        'export const ecosystemReferencePoints: EcosystemReferencePoint[] = [',
+        "  { id: 'cra', label: 'Create React App (CRA)', status: 'Legacy стартовая точка', ... },",
+        "  { id: 'vite', label: 'Vite', status: 'Основная client-side отправная точка', ... },",
+        "  { id: 'react-router-framework', label: 'React Router framework mode', status: 'Framework-first вариант на базе React Router', ... },",
+        "  { id: 'nextjs', label: 'Next.js App Router', status: 'Full-stack React framework', ... },",
+        '];',
+      ].join('\n'),
+    },
+    {
+      label: 'src/router.tsx',
+      note: 'Текущий проект не только говорит о React Router, но и реально использует его для навигации между лабораториями.',
+      code: [
+        'export const router = createBrowserRouter([',
+        '  {',
+        "    path: '/',",
+        '    element: <AppLayout />,',
+        "    children: [{ index: true, element: <Navigate to=\"/ecosystem\" replace /> }, ...],",
+        '  },',
+        ']);',
       ].join('\n'),
     },
     {
@@ -83,7 +114,11 @@ export const whyReactStudy: StudyMaterial = {
     },
     {
       path: 'src/App.tsx',
-      note: 'Общий shell показывает, как отдельная лаборатория подключается без отдельного роутинга и лишней инфраструктуры.',
+      note: 'Общий shell показывает, как layout и текущая лаборатория соединяются через React Router.',
+    },
+    {
+      path: 'src/router.tsx',
+      note: 'Роутер показывает, что даже учебный shell можно держать как маршрутизируемую структуру, а не как один state-switch.',
     },
   ],
   snippets: [
@@ -209,7 +244,11 @@ export const deliveryStudy: StudyMaterial = {
     },
     {
       path: 'src/App.tsx',
-      note: 'Общий shell сам является примером осознанного выбора простого one-page подхода без роутера.',
+      note: 'Общий shell сам является примером Vite SPA с клиентским React Router, а не framework-first приложения.',
+    },
+    {
+      path: 'src/router.tsx',
+      note: 'Здесь видно, как клиентский роутинг отделён от обсуждения framework mode и Next.js.',
     },
     {
       path: 'README.md',
@@ -249,6 +288,9 @@ export const deliveryStudy: StudyMaterial = {
         '  if (requirements.has(\'server-actions\')) {',
         '    scores[\'framework-first\'] += 6;',
         '  }',
+        '',
+        "  // Framework-first здесь дальше раскрывается через",
+        "  // React Router framework mode и Next.js.",
         '}',
       ].join('\n'),
     },
@@ -267,7 +309,7 @@ export const toolingStudy: StudyMaterial = {
     },
     {
       path: 'package.json',
-      note: 'Показывает реальные scripts и зависимости текущего проекта.',
+      note: 'Показывает реальные scripts и зависимости текущего проекта, включая react-router-dom.',
     },
     {
       path: 'Dockerfile',
@@ -309,6 +351,9 @@ export const toolingStudy: StudyMaterial = {
         '  "build": "tsc --noEmit && vite build",',
         '  "preview": "vite preview --host 0.0.0.0 --port 4173",',
         '  "test": "vitest run"',
+        '},',
+        '"dependencies": {',
+        '  "react-router-dom": "7.13.1"',
         '}',
       ].join('\n'),
     },

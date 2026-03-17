@@ -1,8 +1,9 @@
 export const stackVersions = {
   react: '19.2.4',
   reactDom: '19.2.4',
-  reactRouterDom: '7.13.1',
   typescript: '5.7.3',
+  eslint: '9.38.0',
+  prettier: '3.6.2',
   vite: '7.1.4',
   viteReactPlugin: '5.0.2',
   tailwindcss: '4.2.1',
@@ -14,8 +15,9 @@ export const stackVersions = {
 
 export const stackBadges = [
   `React ${stackVersions.react}`,
-  `React Router DOM ${stackVersions.reactRouterDom}`,
   `TypeScript ${stackVersions.typescript}`,
+  `ESLint ${stackVersions.eslint}`,
+  `Prettier ${stackVersions.prettier}`,
   `Vite ${stackVersions.vite}`,
   `@vitejs/plugin-react ${stackVersions.viteReactPlugin}`,
   `Tailwind CSS ${stackVersions.tailwindcss}`,
@@ -25,5 +27,4 @@ export const stackBadges = [
   `Nginx ${stackVersions.nginxImage}`,
 ] as const;
 
-export const stackSummary =
-  `React ${stackVersions.react}, React Router DOM ${stackVersions.reactRouterDom}, Vite ${stackVersions.vite}, @vitejs/plugin-react ${stackVersions.viteReactPlugin}, Tailwind CSS ${stackVersions.tailwindcss}, Vitest ${stackVersions.vitest} и контейнерный запуск через Node ${stackVersions.nodeImage} + Nginx ${stackVersions.nginxImage}.`;
+export const stackSummary = `React ${stackVersions.react}, TypeScript ${stackVersions.typescript}, ESLint ${stackVersions.eslint}, Prettier ${stackVersions.prettier}, Vite ${stackVersions.vite}, Tailwind CSS ${stackVersions.tailwindcss}, Vitest ${stackVersions.vitest} и контейнерный запуск через Node ${stackVersions.nodeImage} + Nginx ${stackVersions.nginxImage}.`;

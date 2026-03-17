@@ -196,7 +196,8 @@ export function PipelinePage() {
           items={[
             'No-build полезен как учебный контраст, но не закрывает основной modern React workflow.',
             'Vite объясняет современный client-side pipeline: JSX, npm-граф, HMR, production build.',
-            'Framework-first нужен тогда, когда у вас уже не только клиентский UI, а полноценная серверно-клиентская архитектура.',
+            'CRA исторически скрывал многие детали пайплайна, а Vite и framework-first подходы делают текущую архитектурную картину заметно яснее.',
+            'Framework-first нужен тогда, когда у вас уже не только клиентский UI, а полноценная серверно-клиентская архитектура уровня React Router framework mode или Next.js.',
           ]}
         />
       </Panel>
