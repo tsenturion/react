@@ -1,0 +1,50 @@
+[
+  {
+    "id": "effect-intro",
+    "title": "Effect как синхронизация, а не как второй render",
+    "kind": "synchronization",
+    "summary": "useEffect нужен там, где React должен синхронизироваться с браузером, сетью, таймером или подпиской."
+  },
+  {
+    "id": "cleanup-subscription",
+    "title": "Cleanup у подписок",
+    "kind": "cleanup",
+    "summary": "Cleanup снимает старую подписку до следующего effect run и при unmount."
+  },
+  {
+    "id": "dependency-list",
+    "title": "Dependencies должны описывать всё, чем effect реально пользуется",
+    "kind": "dependencies",
+    "summary": "Если зависимость пропущена, внешний мир останется на старых данных."
+  },
+  {
+    "id": "abort-fetch",
+    "title": "AbortController для сетевых запросов",
+    "kind": "cleanup",
+    "summary": "Отмена устаревшего запроса защищает от stale response и лишних обновлений интерфейса."
+  },
+  {
+    "id": "interval-leak",
+    "title": "Interval без cleanup создаёт утечки",
+    "kind": "pitfall",
+    "summary": "Старые таймеры продолжают тикать и дублируют работу после смены delay или unmount."
+  },
+  {
+    "id": "derived-no-effect",
+    "title": "Derived values не нужно хранить через effect",
+    "kind": "pitfall",
+    "summary": "Если значение вычисляется из текущего state, лучше считать его прямо в render."
+  },
+  {
+    "id": "external-api",
+    "title": "Внешние API и imperative integration",
+    "kind": "synchronization",
+    "summary": "Иногда effect нужен, чтобы синхронизировать React с картой, player API или browser listener."
+  },
+  {
+    "id": "loop-risk",
+    "title": "Effect loop risk",
+    "kind": "pitfall",
+    "summary": "Если effect обновляет ту же зависимость, по которой он запускается, возникает render loop."
+  }
+]
