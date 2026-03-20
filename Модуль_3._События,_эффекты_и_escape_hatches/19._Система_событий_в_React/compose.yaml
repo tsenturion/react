@@ -1,0 +1,7 @@
+services:
+  react-event-system-lab:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:80'

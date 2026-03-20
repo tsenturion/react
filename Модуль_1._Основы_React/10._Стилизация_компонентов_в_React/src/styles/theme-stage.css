@@ -1,0 +1,115 @@
+.theme-stage {
+  --stage-bg: #fffaf2;
+  --stage-surface: #ffffff;
+  --stage-text: #1f2937;
+  --stage-muted: #475569;
+  --stage-accent: #c2410c;
+  --stage-border: rgba(148, 163, 184, 0.24);
+  border-radius: 32px;
+  border: 1px solid var(--stage-border);
+  background: var(--stage-bg);
+  color: var(--stage-text);
+  padding: 1.5rem;
+}
+
+.theme-stage[data-theme='paper'] {
+  --stage-bg: #fffaf2;
+  --stage-surface: #ffffff;
+  --stage-text: #1f2937;
+  --stage-muted: #475569;
+  --stage-accent: #c2410c;
+  --stage-border: rgba(148, 163, 184, 0.24);
+}
+
+.theme-stage[data-theme='graphite'] {
+  --stage-bg: #0f172a;
+  --stage-surface: #111827;
+  --stage-text: #f8fafc;
+  --stage-muted: #cbd5e1;
+  --stage-accent: #38bdf8;
+  --stage-border: rgba(56, 189, 248, 0.18);
+}
+
+.theme-stage[data-theme='signal'] {
+  --stage-bg: #f0fdf4;
+  --stage-surface: #ecfeff;
+  --stage-text: #082f49;
+  --stage-muted: #155e75;
+  --stage-accent: #0f766e;
+  --stage-border: rgba(15, 118, 110, 0.16);
+}
+
+.theme-stage[data-density='compact'] {
+  padding: 1rem;
+}
+
+.theme-stage__hero,
+.theme-stage__grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.theme-stage__grid {
+  margin-top: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.theme-stage__panel {
+  border: 1px solid var(--stage-border);
+  border-radius: 24px;
+  background: var(--stage-surface);
+  padding: 1.15rem;
+  box-shadow:
+    0 16px 42px rgba(15, 23, 42, 0.04),
+    0 0 0 rgba(0, 0, 0, 0);
+}
+
+.theme-stage[data-elevated='true'] .theme-stage__panel {
+  box-shadow: 0 18px 44px color-mix(in srgb, var(--stage-accent) 8%, transparent);
+}
+
+.theme-stage__panel--accent {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--stage-accent) 14%, var(--stage-surface)) 0%,
+    var(--stage-surface) 100%
+  );
+}
+
+.theme-stage__eyebrow,
+.theme-stage__label {
+  margin: 0;
+  color: var(--stage-accent);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.theme-stage__title {
+  margin: 0.7rem 0 0;
+  font-size: 1.9rem;
+  line-height: 1.08;
+}
+
+.theme-stage__copy {
+  margin: 0.7rem 0 0;
+  color: var(--stage-muted);
+  line-height: 1.7;
+}
+
+.theme-stage__metric {
+  display: block;
+  margin-top: 0.65rem;
+  font-size: 1.45rem;
+}
+
+.theme-stage__badge {
+  justify-self: start;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--stage-accent) 16%, transparent);
+  color: var(--stage-accent);
+  padding: 0.6rem 0.95rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}

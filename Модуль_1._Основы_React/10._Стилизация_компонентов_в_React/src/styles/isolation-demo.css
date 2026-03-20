@@ -1,0 +1,41 @@
+.global-scope-demo {
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 28px;
+  background: #ffffff;
+  padding: 1.25rem;
+  box-shadow: 0 16px 42px rgba(15, 23, 42, 0.05);
+}
+
+.global-scope-demo .eyebrow {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.global-scope-demo .title {
+  margin: 0.8rem 0 0;
+  color: #9a3412;
+  font-size: 1.75rem;
+  line-height: 1.1;
+}
+
+.global-scope-demo .note {
+  margin: 0.8rem 0 0;
+  color: #475569;
+  line-height: 1.7;
+}
+
+.global-scope-demo--loud .title {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #7c2d12;
+}
+
+.global-scope-demo--loud .note {
+  border-radius: 18px;
+  background: #ffedd5;
+  padding: 0.9rem;
+}

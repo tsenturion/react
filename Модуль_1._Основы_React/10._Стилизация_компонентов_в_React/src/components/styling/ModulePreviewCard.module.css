@@ -1,0 +1,59 @@
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: #ffffff;
+  padding: 1.25rem;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.05);
+}
+
+.compact {
+  padding: 1rem;
+}
+
+.teal {
+  background: linear-gradient(180deg, #ffffff 0%, #ecfeff 100%);
+}
+
+.amber {
+  background: linear-gradient(180deg, #ffffff 0%, #fff7ed 100%);
+}
+
+.slate {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.eyebrow {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.title {
+  margin: 0.7rem 0 0;
+  color: #0f172a;
+  font-size: 1.8rem;
+  line-height: 1.08;
+}
+
+.note {
+  margin: 0.8rem 0 0;
+  color: #475569;
+  line-height: 1.65;
+}
+
+.ribbon {
+  display: inline-flex;
+  margin-bottom: 0.75rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.08);
+  padding: 0.45rem 0.75rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}

@@ -1,0 +1,105 @@
+.marketing-card {
+  --accent: #0284c7;
+  --accent-soft: #e0f2fe;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, #ffffff);
+  border-radius: 28px;
+  background:
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--accent) 18%, #ffffff) 0,
+      transparent 44%
+    ),
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      color-mix(in srgb, var(--accent-soft) 62%, #ffffff) 100%
+    );
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+}
+
+.marketing-card--ocean {
+  --accent: #0284c7;
+  --accent-soft: #e0f2fe;
+}
+
+.marketing-card--amber {
+  --accent: #d97706;
+  --accent-soft: #fef3c7;
+}
+
+.marketing-card--forest {
+  --accent: #15803d;
+  --accent-soft: #dcfce7;
+}
+
+.marketing-card--compact .marketing-card__content {
+  padding: 1.1rem;
+}
+
+.marketing-card--compact .marketing-card__title {
+  font-size: 1.6rem;
+}
+
+.marketing-card--strong {
+  box-shadow: 0 22px 60px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.marketing-card--outlined {
+  outline: 2px solid color-mix(in srgb, var(--accent) 24%, transparent);
+  outline-offset: 4px;
+}
+
+.marketing-card__glow {
+  position: absolute;
+  inset: auto -40px -40px auto;
+  width: 140px;
+  height: 140px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 22%, #ffffff);
+  filter: blur(18px);
+}
+
+.marketing-card__content {
+  position: relative;
+  padding: 1.5rem;
+}
+
+.marketing-card__eyebrow {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.marketing-card__title {
+  margin: 0.7rem 0 0;
+  color: #0f172a;
+  font-size: 2rem;
+  line-height: 1.05;
+}
+
+.marketing-card__copy {
+  margin: 0.9rem 0 0;
+  color: #475569;
+  line-height: 1.7;
+}
+
+.marketing-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.marketing-card__meta span {
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent-soft) 84%, white);
+  color: color-mix(in srgb, var(--accent) 82%, #0f172a);
+  padding: 0.55rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
