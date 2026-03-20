@@ -1,0 +1,44 @@
+[
+  {
+    "id": "guide-1",
+    "title": "Effect-local async function",
+    "track": "async",
+    "summary": "Async функция живет внутри effect, а cleanup владеет abort и ignore.",
+    "tags": ["async", "cleanup", "effect-local"]
+  },
+  {
+    "id": "guide-2",
+    "title": "Abort stale requests",
+    "track": "race",
+    "summary": "AbortController останавливает устаревший запрос и не дает старому ответу попасть в UI.",
+    "tags": ["abort", "race", "fetch"]
+  },
+  {
+    "id": "guide-3",
+    "title": "Ignore stale response",
+    "track": "race",
+    "summary": "Локальный флаг active пропускает только последний актуальный ответ, но сам запрос не отменяет.",
+    "tags": ["ignore", "race", "cleanup"]
+  },
+  {
+    "id": "guide-4",
+    "title": "Functional updates beat stale closures",
+    "track": "closures",
+    "summary": "Updater function получает актуальное значение state и не зависит от захваченного snapshot.",
+    "tags": ["closures", "state", "interval"]
+  },
+  {
+    "id": "guide-5",
+    "title": "useEffectEvent for external callbacks",
+    "track": "architecture",
+    "summary": "Внешний callback читает свежие props без лишнего reconnect эффекта.",
+    "tags": ["useEffectEvent", "external", "sync"]
+  },
+  {
+    "id": "guide-6",
+    "title": "Move action logic into events",
+    "track": "architecture",
+    "summary": "Если побочное действие начинается кликом, handler обычно лучше отражает причинно-следственную связь, чем effect.",
+    "tags": ["events", "anti-pattern", "business logic"]
+  }
+]

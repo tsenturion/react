@@ -1,0 +1,7 @@
+services:
+  react-escape-hatches-lab:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:80'
