@@ -1,0 +1,42 @@
+[
+  {
+    "id": "catalog-url-search",
+    "title": "Фильтр каталога по поисковой строке",
+    "track": "Routing",
+    "owner": "Frontend platform",
+    "syncCost": "medium",
+    "summary": "Состояние нужно делить ссылкой и восстанавливать после reload."
+  },
+  {
+    "id": "shared-density",
+    "title": "Глобальная плотность интерфейса",
+    "track": "UI",
+    "owner": "Design system",
+    "syncCost": "low",
+    "summary": "Одна настройка должна менять несколько далёких частей дерева."
+  },
+  {
+    "id": "fresh-release-feed",
+    "title": "Лента свежих релизов с сервера",
+    "track": "Data",
+    "owner": "Backend API",
+    "syncCost": "high",
+    "summary": "Данные приходят извне, могут устаревать и требуют refetch."
+  },
+  {
+    "id": "review-note",
+    "title": "Локальный черновик заметки ревью",
+    "track": "UI",
+    "owner": "Reviewer",
+    "syncCost": "low",
+    "summary": "Черновик нужен только одной панели и не должен мешать соседним."
+  },
+  {
+    "id": "operations-banner",
+    "title": "Сигнал статуса серверной операции",
+    "track": "Infra",
+    "owner": "Ops",
+    "syncCost": "medium",
+    "summary": "Серверное состояние может влиять на UI, но не превращается в обычный глобальный toggle."
+  }
+]

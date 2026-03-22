@@ -1,0 +1,7 @@
+services:
+  react-state-boundaries-lab:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:80'
