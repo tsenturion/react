@@ -1,0 +1,52 @@
+{
+  "items": [
+    {
+      "id": "http-1",
+      "title": "Catalog bootstrap",
+      "category": "loading",
+      "summary": "Первый запрос на экран каталога курсов.",
+      "note": "Нужен явный loading state, потому что без него экран выглядит как зависший.",
+      "risk": "medium"
+    },
+    {
+      "id": "http-2",
+      "title": "Filters refetch",
+      "category": "query",
+      "summary": "Запрос при изменении фильтров и поисковой строки.",
+      "note": "Нужно защищаться от race conditions и устаревших ответов.",
+      "risk": "high"
+    },
+    {
+      "id": "http-3",
+      "title": "Analytics refresh",
+      "category": "retry",
+      "summary": "Повторный запрос метрик после временной ошибки 503.",
+      "note": "Retry полезен только для транзиентных сбоев, а не для любой ошибки подряд.",
+      "risk": "medium"
+    },
+    {
+      "id": "http-4",
+      "title": "Empty inbox",
+      "category": "empty",
+      "summary": "Успешный ответ без элементов.",
+      "note": "Пустой результат — это отдельное состояние UI, а не разновидность ошибки.",
+      "risk": "low"
+    },
+    {
+      "id": "http-5",
+      "title": "Abort on navigation",
+      "category": "abort",
+      "summary": "Переход на другой экран, пока запрос ещё выполняется.",
+      "note": "Нужна отмена, чтобы поздний ответ не обновил уже нерелевантный UI.",
+      "risk": "high"
+    },
+    {
+      "id": "http-6",
+      "title": "Request log panel",
+      "category": "lifecycle",
+      "summary": "Живой журнал состояний сетевого запроса.",
+      "note": "Явная модель жизненного цикла упрощает отладку и снижает хаос в компоненте.",
+      "risk": "medium"
+    }
+  ]
+}

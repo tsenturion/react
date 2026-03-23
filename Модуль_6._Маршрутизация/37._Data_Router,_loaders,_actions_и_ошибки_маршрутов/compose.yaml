@@ -1,0 +1,8 @@
+services:
+  react-data-router-loaders-actions-lab:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:80'
+    restart: unless-stopped

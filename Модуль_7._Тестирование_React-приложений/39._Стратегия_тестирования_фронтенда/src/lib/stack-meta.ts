@@ -1,0 +1,17 @@
+export const stackBadges = [
+  'React 19.2.4',
+  'React DOM 19.2.4',
+  'React Router DOM 7.13.2',
+  'TypeScript 5.7.3',
+  'Vite 7.1.4',
+  '@vitejs/plugin-react 5.0.2',
+  'Tailwind CSS 4.2.1',
+  '@tailwindcss/vite 4.2.1',
+  'Vitest 2.1.9',
+  '@testing-library/react 16.3.2',
+  'Playwright 1.58.2',
+  'ESLint 9.38.0',
+  'Prettier 3.6.2',
+  'Node 22-alpine',
+  'Nginx 1.27-alpine',
+] as const;
