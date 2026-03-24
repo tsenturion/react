@@ -1,0 +1,124 @@
+@import 'tailwindcss';
+
+:root {
+  color-scheme: light;
+  --bg: #f5f7f4;
+  --bg-strong: #ffffff;
+  --panel: rgba(255, 255, 255, 0.92);
+  --panel-strong: rgba(15, 23, 42, 0.95);
+  --line: rgba(15, 23, 42, 0.12);
+  --text: #111827;
+  --muted: #475569;
+  --accent: #0f766e;
+  --accent-soft: #ccfbf1;
+  --accent-cool: #b45309;
+  --accent-cool-soft: #ffedd5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Trebuchet MS', 'Avenir Next', 'Segoe UI', sans-serif;
+  color: var(--text);
+  background: linear-gradient(135deg, #fbfefc 0%, #effaf5 42%, #fff7ed 100%);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+code,
+pre,
+kbd {
+  font-family: Consolas, 'SFMono-Regular', 'Liberation Mono', monospace;
+}
+
+::selection {
+  background: rgba(15, 118, 110, 0.18);
+}
+
+:focus-visible {
+  outline: 3px solid #0f766e;
+  outline-offset: 3px;
+}
+
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-2xl border border-slate-200 bg-white shadow-lg;
+  }
+
+  .panel-dark {
+    @apply rounded-2xl border border-slate-800 bg-slate-950 text-slate-50 shadow-xl;
+  }
+
+  .soft-label {
+    @apply inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-teal-800;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl;
+  }
+
+  .section-copy {
+    @apply max-w-3xl text-sm leading-6 text-slate-600 sm:text-[15px];
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 transition;
+  }
+
+  .chip-active {
+    @apply border-transparent bg-teal-700 text-white shadow-md;
+  }
+
+  .status-success {
+    @apply border-emerald-500/20 bg-emerald-500/10 text-emerald-800;
+  }
+
+  .status-warn {
+    @apply border-amber-500/20 bg-amber-500/10 text-amber-800;
+  }
+
+  .status-error {
+    @apply border-rose-500/20 bg-rose-500/10 text-rose-800;
+  }
+
+  .skip-link {
+    @apply absolute left-4 top-4 z-50 rounded-xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white shadow-xl;
+    transform: translateY(-160%);
+    transition: transform 0.18s ease;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .sr-only {
+    @apply absolute h-px w-px overflow-hidden whitespace-nowrap border-0 p-0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    margin: -1px;
+  }
+}
