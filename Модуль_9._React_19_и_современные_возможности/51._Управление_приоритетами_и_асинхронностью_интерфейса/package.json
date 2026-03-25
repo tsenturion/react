@@ -1,0 +1,45 @@
+{
+  "name": "react-priority-async-lab",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4173",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "clsx": "2.1.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-router-dom": "7.13.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.38.0",
+    "@tailwindcss/vite": "4.2.1",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
+    "@testing-library/user-event": "14.6.1",
+    "@types/node": "22.19.15",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "5.0.2",
+    "eslint": "9.38.0",
+    "eslint-plugin-react-hooks": "7.0.0",
+    "eslint-plugin-react-refresh": "0.4.24",
+    "globals": "16.4.0",
+    "jsdom": "26.1.0",
+    "prettier": "3.6.2",
+    "tailwindcss": "4.2.1",
+    "typescript": "5.7.3",
+    "typescript-eslint": "8.46.3",
+    "vite": "7.1.4",
+    "vite-node": "^2.1.9",
+    "vitest": "2.1.9"
+  }
+}
