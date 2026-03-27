@@ -24,18 +24,81 @@ export interface EcosystemLayer {
 }
 
 export const ecosystemLayers: EcosystemLayer[] = [
-  { id: 'browser', title: 'Браузер', zone: 'browser', short: 'Показывает интерфейс и выполняет клиентский JS.' },
-  { id: 'dom', title: 'DOM', zone: 'browser', short: 'Дерево узлов, которое React и обычный JS обновляют.' },
-  { id: 'javascript', title: 'JavaScript', zone: 'browser', short: 'Язык, на котором пишется логика интерфейса.' },
-  { id: 'react', title: 'React', zone: 'architecture', short: 'Декларативный слой описания UI из компонентов.' },
-  { id: 'node', title: 'Node.js', zone: 'tooling', short: 'Исполняет dev-серверы, сборку, тесты и CLI-инструменты.' },
-  { id: 'npm', title: 'npm', zone: 'tooling', short: 'Каталог пакетов и пакетный менеджер вокруг экосистемы.' },
-  { id: 'vite', title: 'Vite', zone: 'tooling', short: 'Делает dev server, HMR и production build.' },
-  { id: 'react-router', title: 'React Router', zone: 'architecture', short: 'Даёт клиентский роутинг и data APIs поверх React-экранов.' },
-  { id: 'react-router-framework', title: 'React Router framework mode', zone: 'architecture', short: 'Поднимает React Router до framework-уровня: routes, loaders/actions, bundling и server/client границы.' },
-  { id: 'nextjs', title: 'Next.js', zone: 'architecture', short: 'Full-stack React framework с App Router, серверным рендерингом и server features.' },
-  { id: 'full-stack-react', title: 'Full-stack React', zone: 'architecture', short: 'Архитектурный слой, где React работает вместе с маршрутизацией, данными и сервером.' },
-  { id: 'docker', title: 'Docker', zone: 'tooling', short: 'Упаковывает приложение и среду запуска в воспроизводимый образ.' },
+  {
+    id: 'browser',
+    title: 'Браузер',
+    zone: 'browser',
+    short: 'Показывает интерфейс и выполняет клиентский JS.',
+  },
+  {
+    id: 'dom',
+    title: 'DOM',
+    zone: 'browser',
+    short: 'Дерево узлов, которое React и обычный JS обновляют.',
+  },
+  {
+    id: 'javascript',
+    title: 'JavaScript',
+    zone: 'browser',
+    short: 'Язык, на котором пишется логика интерфейса.',
+  },
+  {
+    id: 'react',
+    title: 'React',
+    zone: 'architecture',
+    short: 'Декларативный слой описания UI из компонентов.',
+  },
+  {
+    id: 'node',
+    title: 'Node.js',
+    zone: 'tooling',
+    short: 'Исполняет dev-серверы, сборку, тесты и CLI-инструменты.',
+  },
+  {
+    id: 'npm',
+    title: 'npm',
+    zone: 'tooling',
+    short: 'Каталог пакетов и пакетный менеджер вокруг экосистемы.',
+  },
+  {
+    id: 'vite',
+    title: 'Vite',
+    zone: 'tooling',
+    short: 'Делает dev server, HMR и production build.',
+  },
+  {
+    id: 'react-router',
+    title: 'React Router',
+    zone: 'architecture',
+    short: 'Даёт клиентский роутинг и data APIs поверх React-экранов.',
+  },
+  {
+    id: 'react-router-framework',
+    title: 'React Router framework mode',
+    zone: 'architecture',
+    short:
+      'Поднимает React Router до framework-уровня: routes, loaders/actions, bundling и server/client границы.',
+  },
+  {
+    id: 'nextjs',
+    title: 'Next.js',
+    zone: 'architecture',
+    short:
+      'Full-stack React framework с App Router, серверным рендерингом и server features.',
+  },
+  {
+    id: 'full-stack-react',
+    title: 'Full-stack React',
+    zone: 'architecture',
+    short:
+      'Архитектурный слой, где React работает вместе с маршрутизацией, данными и сервером.',
+  },
+  {
+    id: 'docker',
+    title: 'Docker',
+    zone: 'tooling',
+    short: 'Упаковывает приложение и среду запуска в воспроизводимый образ.',
+  },
 ];
 
 export type RuntimeId = 'browser' | 'node' | 'build' | 'server' | 'container';
@@ -65,12 +128,25 @@ export const ecosystemTasks: EcosystemTask[] = [
     prompt: 'Вы меняете исходники и хотите сразу увидеть UI на странице.',
     activeLayers: ['browser', 'dom', 'javascript', 'react', 'vite', 'node'],
     runtimes: [
-      { id: 'node', label: 'Node.js', detail: 'Запускает Vite dev server и раздаёт модули.' },
-      { id: 'build', label: 'Transform', detail: 'Vite преобразует JSX и строит модульный граф.' },
-      { id: 'browser', label: 'Browser', detail: 'Браузер исполняет итоговые модули и рисует интерфейс.' },
+      {
+        id: 'node',
+        label: 'Node.js',
+        detail: 'Запускает Vite dev server и раздаёт модули.',
+      },
+      {
+        id: 'build',
+        label: 'Transform',
+        detail: 'Vite преобразует JSX и строит модульный граф.',
+      },
+      {
+        id: 'browser',
+        label: 'Browser',
+        detail: 'Браузер исполняет итоговые модули и рисует интерфейс.',
+      },
     ],
     before: 'Легко спутать React с магией: как будто код сам появляется в браузере.',
-    after: 'На деле есть цепочка: исходники -> dev server/build tool -> модульный граф -> браузер -> DOM.',
+    after:
+      'На деле есть цепочка: исходники -> dev server/build tool -> модульный граф -> браузер -> DOM.',
     whyItMatters: [
       'Понимание цепочки ускоряет отладку импортов, env-переменных и ошибок сборки.',
       'Становится ясно, почему JSX и bare imports не исполняются браузером без подготовки.',
@@ -86,12 +162,25 @@ export const ecosystemTasks: EcosystemTask[] = [
     prompt: 'Нужно добавить пакет из экосистемы и использовать его в UI.',
     activeLayers: ['npm', 'node', 'vite', 'javascript', 'react'],
     runtimes: [
-      { id: 'node', label: 'Node.js', detail: 'Пакетный менеджер и установка живут вне браузера.' },
-      { id: 'build', label: 'Dependency graph', detail: 'Vite резолвит пакет и собирает его в приложение.' },
-      { id: 'browser', label: 'Browser', detail: 'Браузер получает уже подготовленный код пакета.' },
+      {
+        id: 'node',
+        label: 'Node.js',
+        detail: 'Пакетный менеджер и установка живут вне браузера.',
+      },
+      {
+        id: 'build',
+        label: 'Dependency graph',
+        detail: 'Vite резолвит пакет и собирает его в приложение.',
+      },
+      {
+        id: 'browser',
+        label: 'Browser',
+        detail: 'Браузер получает уже подготовленный код пакета.',
+      },
     ],
     before: 'Кажется, что npm и React живут в одном месте и работают одинаково.',
-    after: 'npm нужен для поставки кода, React нужен для описания UI, а Vite связывает это в рабочий pipeline.',
+    after:
+      'npm нужен для поставки кода, React нужен для описания UI, а Vite связывает это в рабочий pipeline.',
     whyItMatters: [
       'Это объясняет, почему без `npm install` import может существовать в коде, но не работать в сборке.',
       'Становится понятна разница между dependency и devDependency.',
@@ -104,15 +193,29 @@ export const ecosystemTasks: EcosystemTask[] = [
   {
     id: 'ship-build',
     title: 'Подготовить production build',
-    prompt: 'Вы готовите приложение к production: его нужно собрать, оптимизировать и корректно доставить в браузер.',
+    prompt:
+      'Вы готовите приложение к production: его нужно собрать, оптимизировать и корректно доставить в браузер.',
     activeLayers: ['vite', 'node', 'react', 'javascript', 'browser', 'docker'],
     runtimes: [
-      { id: 'build', label: 'Build step', detail: 'Сборщик минимизирует код, делит чанки и хэширует ассеты.' },
-      { id: 'container', label: 'Docker', detail: 'Готовый билд можно упаковать в воспроизводимый контейнер.' },
-      { id: 'browser', label: 'Browser', detail: 'Вы открываете уже оптимизированные статические файлы в браузере.' },
+      {
+        id: 'build',
+        label: 'Build step',
+        detail: 'Сборщик минимизирует код, делит чанки и хэширует ассеты.',
+      },
+      {
+        id: 'container',
+        label: 'Docker',
+        detail: 'Готовый билд можно упаковать в воспроизводимый контейнер.',
+      },
+      {
+        id: 'browser',
+        label: 'Browser',
+        detail: 'Вы открываете уже оптимизированные статические файлы в браузере.',
+      },
     ],
     before: 'Есть иллюзия, что dev server и production ведут себя одинаково.',
-    after: 'В production нет HMR и внутренних проверок: важны статические ассеты, маршруты и конфигурация сервера.',
+    after:
+      'В production нет HMR и внутренних проверок: важны статические ассеты, маршруты и конфигурация сервера.',
     whyItMatters: [
       'Ошибки, которые не видны в деве, часто всплывают на build-этапе или внутри Docker/Linux.',
       'Это критично для SPA-роутинга, env-переменных и корректной раздачи `index.html`.',
@@ -128,11 +231,20 @@ export const ecosystemTasks: EcosystemTask[] = [
     prompt: 'Интерфейс разрастается и его нужно разделить на экраны.',
     activeLayers: ['react', 'react-router', 'browser', 'javascript', 'vite'],
     runtimes: [
-      { id: 'browser', label: 'Browser', detail: 'Адрес меняется без полной загрузки новой HTML-страницы.' },
-      { id: 'build', label: 'Bundler', detail: 'Маршруты и чанки связываются в единое SPA-приложение.' },
+      {
+        id: 'browser',
+        label: 'Browser',
+        detail: 'Адрес меняется без полной загрузки новой HTML-страницы.',
+      },
+      {
+        id: 'build',
+        label: 'Bundler',
+        detail: 'Маршруты и чанки связываются в единое SPA-приложение.',
+      },
     ],
     before: 'Можно подумать, что роутинг сам по себе уже означает full-stack приложение.',
-    after: 'Клиентский React Router управляет экранами в браузере, но не добавляет автоматически SSR и framework-level server data.',
+    after:
+      'Клиентский React Router управляет экранами в браузере, но не добавляет автоматически SSR и framework-level server data.',
     whyItMatters: [
       'Это помогает не путать SPA-роутинг с framework-first архитектурой.',
       'Становится яснее, зачем для сложных data flows иногда нужен уже не только Vite, а React Router framework mode или Next.js.',
@@ -145,7 +257,8 @@ export const ecosystemTasks: EcosystemTask[] = [
   {
     id: 'server-rendering',
     title: 'Нужны SSR, loader/action или server functions',
-    prompt: 'Проект требует не только клиентский UI, но и серверный слой в той же архитектуре.',
+    prompt:
+      'Проект требует не только клиентский UI, но и серверный слой в той же архитектуре.',
     activeLayers: [
       'full-stack-react',
       'react',
@@ -155,11 +268,20 @@ export const ecosystemTasks: EcosystemTask[] = [
       'browser',
     ],
     runtimes: [
-      { id: 'server', label: 'Server runtime', detail: 'Часть React-логики и загрузки данных выполняется на сервере.' },
-      { id: 'browser', label: 'Browser', detail: 'Клиент гидрирует интерфейс и продолжает взаимодействие.' },
+      {
+        id: 'server',
+        label: 'Server runtime',
+        detail: 'Часть React-логики и загрузки данных выполняется на сервере.',
+      },
+      {
+        id: 'browser',
+        label: 'Browser',
+        detail: 'Клиент гидрирует интерфейс и продолжает взаимодействие.',
+      },
     ],
     before: 'Легко ожидать, что Vite сам превратит SPA в full-stack решение.',
-    after: 'Для SSR и server data нужен full-stack React слой: например, React Router framework mode или Next.js, а не только Vite SPA.',
+    after:
+      'Для SSR и server data нужен full-stack React слой: например, React Router framework mode или Next.js, а не только Vite SPA.',
     whyItMatters: [
       'Это помогает выбрать правильный уровень абстракции до того, как приложение перерастёт простой SPA.',
       'Понимание границ client/server уменьшает архитектурные тупики.',
@@ -175,11 +297,21 @@ export const ecosystemTasks: EcosystemTask[] = [
     prompt: 'Нужно, чтобы проект одинаково запускался локально, в CI и в контейнере.',
     activeLayers: ['node', 'npm', 'vite', 'docker', 'react'],
     runtimes: [
-      { id: 'node', label: 'Local/CI Node.js', detail: 'Одинаковые версии Node и scripts убирают класс ошибок "у меня работает".' },
-      { id: 'container', label: 'Docker', detail: 'Контейнер фиксирует окружение и способ доставки приложения.' },
+      {
+        id: 'node',
+        label: 'Local/CI Node.js',
+        detail:
+          'Одинаковые версии Node и scripts убирают класс ошибок "у меня работает".',
+      },
+      {
+        id: 'container',
+        label: 'Docker',
+        detail: 'Контейнер фиксирует окружение и способ доставки приложения.',
+      },
     ],
     before: 'Среду разработки часто воспринимают как второстепенную деталь.',
-    after: 'На практике `package.json`, scripts, версия Node и Docker напрямую влияют на воспроизводимость проекта.',
+    after:
+      'На практике `package.json`, scripts, версия Node и Docker напрямую влияют на воспроизводимость проекта.',
     whyItMatters: [
       'Это критично для onboarding, CI, сборки и последующего деплоя.',
       'Даже сильный UI-код теряет ценность, если проект нестабилен как инженерная система.',
@@ -205,28 +337,33 @@ export const artifactChecks: ArtifactCheck[] = [
     title: 'HTML + обычный JS',
     directOwner: 'Браузер понимает это напрямую.',
     needsStep: 'Дополнительный build-этап не обязателен.',
-    practice: 'Хорошо для простых виджетов и понимания платформы, но быстро упирается в масштабируемость UI.',
+    practice:
+      'Хорошо для простых виджетов и понимания платформы, но быстро упирается в масштабируемость UI.',
   },
   {
     id: 'jsx',
     title: 'JSX-компонент',
     directOwner: 'Браузер напрямую JSX не исполняет.',
     needsStep: 'Нужен transform: Vite/Babel/компилятор превращает JSX в JS.',
-    practice: 'Это ключ к пониманию, почему React почти всегда изучают вместе со сборщиком.',
+    practice:
+      'Это ключ к пониманию, почему React почти всегда изучают вместе со сборщиком.',
   },
   {
     id: 'typescript',
     title: 'TypeScript-аннотации',
     directOwner: 'TypeScript живёт на этапе разработки, не в рантайме браузера.',
     needsStep: 'Нужен transpile/strip типов до обычного JS.',
-    practice: 'Поэтому типы помогают разработке, но не заменяют понимание реального runtime-поведения.',
+    practice:
+      'Поэтому типы помогают разработке, но не заменяют понимание реального runtime-поведения.',
   },
   {
     id: 'npm-package',
     title: 'Импорт `react` из npm',
     directOwner: 'Имя пакета резолвится инструментами, а не "магией браузера".',
-    needsStep: 'Пакет должен быть установлен, затем сборщик или dev server подключает его в граф модулей.',
-    practice: 'Это объясняет типичный `Cannot find package` при проблемах с зависимостями.',
+    needsStep:
+      'Пакет должен быть установлен, затем сборщик или dev server подключает его в граф модулей.',
+    practice:
+      'Это объясняет типичный `Cannot find package` при проблемах с зависимостями.',
   },
   {
     id: 'dockerfile',
@@ -357,11 +494,31 @@ export interface ReactFeatureOption {
 }
 
 export const reactFeatureOptions: ReactFeatureOption[] = [
-  { id: 'shared-state', label: 'Общее состояние', hint: 'Одни и те же данные влияют на несколько частей экрана.' },
-  { id: 'repeated-blocks', label: 'Повторяющиеся блоки', hint: 'Один UI-паттерн нужен много раз с разными данными.' },
-  { id: 'async-states', label: 'Loading/Error/Empty', hint: 'Экран должен держать несколько состояний интерфейса.' },
-  { id: 'team-reuse', label: 'Переиспользование в команде', hint: 'Компоненты становятся инженерным API, а не разовой разметкой.' },
-  { id: 'cross-screen-consistency', label: 'Единое поведение на разных экранах', hint: 'Важно не копировать логику по DOM-обработчикам.' },
+  {
+    id: 'shared-state',
+    label: 'Общее состояние',
+    hint: 'Одни и те же данные влияют на несколько частей экрана.',
+  },
+  {
+    id: 'repeated-blocks',
+    label: 'Повторяющиеся блоки',
+    hint: 'Один UI-паттерн нужен много раз с разными данными.',
+  },
+  {
+    id: 'async-states',
+    label: 'Loading/Error/Empty',
+    hint: 'Экран должен держать несколько состояний интерфейса.',
+  },
+  {
+    id: 'team-reuse',
+    label: 'Переиспользование в команде',
+    hint: 'Компоненты становятся инженерным API, а не разовой разметкой.',
+  },
+  {
+    id: 'cross-screen-consistency',
+    label: 'Единое поведение на разных экранах',
+    hint: 'Важно не копировать логику по DOM-обработчикам.',
+  },
 ];
 
 export interface ReactValueAnalysis {
@@ -457,7 +614,7 @@ export function analyzeReactValue(
     featureSet.has('shared-state')
       ? '  syncHeaderCount(state.items.length);'
       : '  total.textContent = String(state.items.length);',
-    "  state.items.forEach((item) => panel.appendChild(renderCard(item)));",
+    '  state.items.forEach((item) => panel.appendChild(renderCard(item)));',
     '}',
     '',
     'filter.addEventListener("input", (event) => {',
@@ -512,10 +669,26 @@ export interface PipelineModeOption {
 }
 
 export const pipelineModes: PipelineModeOption[] = [
-  { id: 'no-build', label: 'No-build / script tag', hint: 'Почти чистый браузерный runtime без современного build-слоя.' },
-  { id: 'vite-dev', label: 'Vite dev server', hint: 'Dev server, transform, HMR и быстрый feedback loop.' },
-  { id: 'vite-build', label: 'Vite production build', hint: 'Production pipeline: чанки, минификация и ассеты.' },
-  { id: 'framework-first', label: 'Framework-first (React Router / Next.js)', hint: 'Маршруты, данные и серверные возможности как часть full-stack платформы.' },
+  {
+    id: 'no-build',
+    label: 'No-build / script tag',
+    hint: 'Почти чистый браузерный runtime без современного build-слоя.',
+  },
+  {
+    id: 'vite-dev',
+    label: 'Vite dev server',
+    hint: 'Dev server, transform, HMR и быстрый feedback loop.',
+  },
+  {
+    id: 'vite-build',
+    label: 'Vite production build',
+    hint: 'Production pipeline: чанки, минификация и ассеты.',
+  },
+  {
+    id: 'framework-first',
+    label: 'Framework-first (React Router / Next.js)',
+    hint: 'Маршруты, данные и серверные возможности как часть full-stack платформы.',
+  },
 ];
 
 export type PipelineFeatureId =
@@ -534,13 +707,37 @@ export interface PipelineFeatureOption {
 }
 
 export const pipelineFeatureOptions: PipelineFeatureOption[] = [
-  { id: 'jsx', label: 'JSX', hint: 'Пишем компоненты как JSX, а не как голые DOM-операции.' },
-  { id: 'bare-imports', label: 'Bare imports', hint: 'Импортируем пакеты вроде `react` по имени.' },
+  {
+    id: 'jsx',
+    label: 'JSX',
+    hint: 'Пишем компоненты как JSX, а не как голые DOM-операции.',
+  },
+  {
+    id: 'bare-imports',
+    label: 'Bare imports',
+    hint: 'Импортируем пакеты вроде `react` по имени.',
+  },
   { id: 'css-imports', label: 'CSS imports', hint: 'Тянем стили и ассеты из модулей.' },
-  { id: 'typescript', label: 'TypeScript', hint: 'Используем типы и TS-синтаксис в исходниках.' },
-  { id: 'client-env', label: 'Клиентские env-переменные', hint: 'Конфигурация приходит в приложение во время build/dev.' },
-  { id: 'code-splitting', label: 'Code splitting', hint: 'Части приложения загружаются не все сразу.' },
-  { id: 'server-rendering', label: 'SSR / loaders / server actions', hint: 'Нужен серверный слой, а не только клиентский SPA.' },
+  {
+    id: 'typescript',
+    label: 'TypeScript',
+    hint: 'Используем типы и TS-синтаксис в исходниках.',
+  },
+  {
+    id: 'client-env',
+    label: 'Клиентские env-переменные',
+    hint: 'Конфигурация приходит в приложение во время build/dev.',
+  },
+  {
+    id: 'code-splitting',
+    label: 'Code splitting',
+    hint: 'Части приложения загружаются не все сразу.',
+  },
+  {
+    id: 'server-rendering',
+    label: 'SSR / loaders / server actions',
+    hint: 'Нужен серверный слой, а не только клиентский SPA.',
+  },
 ];
 
 export type PipelineIssueId = 'missing-import' | 'missing-package' | 'bad-env-prefix';
@@ -553,8 +750,16 @@ export interface PipelineIssueOption {
 
 export const pipelineIssueOptions: PipelineIssueOption[] = [
   { id: 'missing-import', label: 'Битый import', hint: 'Файл или путь не существуют.' },
-  { id: 'missing-package', label: 'Пакет не установлен', hint: 'В коде import есть, а dependency нет.' },
-  { id: 'bad-env-prefix', label: 'Неверный env-префикс', hint: 'В Vite клиент видит только `VITE_*`.' },
+  {
+    id: 'missing-package',
+    label: 'Пакет не установлен',
+    hint: 'В коде import есть, а dependency нет.',
+  },
+  {
+    id: 'bad-env-prefix',
+    label: 'Неверный env-префикс',
+    hint: 'В Vite клиент видит только `VITE_*`.',
+  },
 ];
 
 export interface PipelineStage {
@@ -573,10 +778,7 @@ export interface PipelineAnalysis {
   importance: string[];
 }
 
-const modeCapabilities: Record<
-  PipelineModeId,
-  Record<PipelineFeatureId, boolean>
-> = {
+const modeCapabilities: Record<PipelineModeId, Record<PipelineFeatureId, boolean>> = {
   'no-build': {
     jsx: false,
     'bare-imports': false,
@@ -682,10 +884,9 @@ export function analyzePipeline(
       id: 'deps',
       label: '3. Зависимости',
       status: featureSet.has('bare-imports') ? 'success' : 'warn',
-      note:
-        featureSet.has('bare-imports')
-          ? 'Пакеты и локальные файлы связаны в единый граф модулей.'
-          : 'Внешние зависимости почти не участвуют, проект ближе к чистому platform-first сценарию.',
+      note: featureSet.has('bare-imports')
+        ? 'Пакеты и локальные файлы связаны в единый граф модулей.'
+        : 'Внешние зависимости почти не участвуют, проект ближе к чистому platform-first сценарию.',
     });
   }
 
@@ -696,7 +897,11 @@ export function analyzePipeline(
       status: 'error',
       note: 'SSR/loaders/actions требуют framework-first архитектуру, а не только client bundler.',
     });
-  } else if (featureSet.has('client-env') && issueSet.has('bad-env-prefix') && mode !== 'no-build') {
+  } else if (
+    featureSet.has('client-env') &&
+    issueSet.has('bad-env-prefix') &&
+    mode !== 'no-build'
+  ) {
     stages.push({
       id: 'server',
       label: '4. Server layer',
@@ -708,10 +913,9 @@ export function analyzePipeline(
       id: 'server',
       label: '4. Server layer',
       status: featureSet.has('server-rendering') ? 'success' : 'warn',
-      note:
-        featureSet.has('server-rendering')
-          ? 'Сервер и клиент делят ответственность: часть логики идёт до гидрации.'
-          : 'Серверный слой минимален или отсутствует, всё держится на клиентском приложении.',
+      note: featureSet.has('server-rendering')
+        ? 'Сервер и клиент делят ответственность: часть логики идёт до гидрации.'
+        : 'Серверный слой минимален или отсутствует, всё держится на клиентском приложении.',
     });
   }
 
@@ -767,14 +971,46 @@ export interface DeliveryRequirementOption {
 }
 
 export const deliveryRequirementOptions: DeliveryRequirementOption[] = [
-  { id: 'marketing-seo', label: 'SEO и первый контент до гидрации', hint: 'Нужны индексируемые страницы и быстрый старт первого экрана.' },
-  { id: 'interactive-dashboard', label: 'Насыщенная клиентская SPA-логика', hint: 'Много интерактивности, таблиц, фильтров, форм и экранов.' },
-  { id: 'server-data', label: 'Данные должны грузиться на маршруте/сервере', hint: 'Нужна не только клиентская загрузка через `useEffect`.' },
-  { id: 'server-actions', label: 'Формы и мутации хотят серверный слой', hint: 'Нужна архитектура ближе к full-stack React.' },
-  { id: 'fast-start', label: 'Нужно быстро стартовать и учиться', hint: 'Минимальный порог входа и понятный developer experience.' },
-  { id: 'minimal-tooling', label: 'Хотим минимум абстракций', hint: 'Команде пока важнее простота, чем все возможности платформы.' },
-  { id: 'team-scale', label: 'Проект будет расти в команде', hint: 'Нужны стабильные соглашения и хорошая архитектурная база.' },
-  { id: 'long-lived-product', label: 'Продукт будет жить долго', hint: 'Важно выбрать подход, который не упрётся в архитектурный потолок.' },
+  {
+    id: 'marketing-seo',
+    label: 'SEO и первый контент до гидрации',
+    hint: 'Нужны индексируемые страницы и быстрый старт первого экрана.',
+  },
+  {
+    id: 'interactive-dashboard',
+    label: 'Насыщенная клиентская SPA-логика',
+    hint: 'Много интерактивности, таблиц, фильтров, форм и экранов.',
+  },
+  {
+    id: 'server-data',
+    label: 'Данные должны грузиться на маршруте/сервере',
+    hint: 'Нужна не только клиентская загрузка через `useEffect`.',
+  },
+  {
+    id: 'server-actions',
+    label: 'Формы и мутации хотят серверный слой',
+    hint: 'Нужна архитектура ближе к full-stack React.',
+  },
+  {
+    id: 'fast-start',
+    label: 'Нужно быстро стартовать и учиться',
+    hint: 'Минимальный порог входа и понятный developer experience.',
+  },
+  {
+    id: 'minimal-tooling',
+    label: 'Хотим минимум абстракций',
+    hint: 'Команде пока важнее простота, чем все возможности платформы.',
+  },
+  {
+    id: 'team-scale',
+    label: 'Проект будет расти в команде',
+    hint: 'Нужны стабильные соглашения и хорошая архитектурная база.',
+  },
+  {
+    id: 'long-lived-product',
+    label: 'Продукт будет жить долго',
+    hint: 'Важно выбрать подход, который не упрётся в архитектурный потолок.',
+  },
 ];
 
 export interface DeliveryModeResult {
@@ -856,7 +1092,8 @@ function scoreDeliveryMode(
       id: 'script-tag',
       label: 'Без сборщика / script-tag',
       score: scores['script-tag'],
-      summary: 'Подходит для маленьких платформенных экспериментов и микро-виджетов, но быстро упирается в пределы экосистемы.',
+      summary:
+        'Подходит для маленьких платформенных экспериментов и микро-виджетов, но быстро упирается в пределы экосистемы.',
       strengths: [
         'Прозрачно видно, что реально понимает браузер.',
         'Минимум инструментария и быстрый старт для простых демо.',
@@ -870,7 +1107,8 @@ function scoreDeliveryMode(
       id: 'vite-spa',
       label: 'Vite + React SPA',
       score: scores['vite-spa'],
-      summary: 'Оптимальная стартовая точка для современного клиентского React-приложения и учебного курса.',
+      summary:
+        'Оптимальная стартовая точка для современного клиентского React-приложения и учебного курса.',
       strengths: [
         'Даёт JSX/TS, dev server, HMR, удобный build и простой mental model.',
         'Хорошо подходит для панелей, админок, кабинетов и интерактивных интерфейсов.',
@@ -884,7 +1122,8 @@ function scoreDeliveryMode(
       id: 'framework-first',
       label: 'Framework-first (React Router / Next.js)',
       score: scores['framework-first'],
-      summary: 'Нужен там, где React уже часть большей платформы: SSR, серверные данные, роуты и мутации как системная архитектура.',
+      summary:
+        'Нужен там, где React уже часть большей платформы: SSR, серверные данные, роуты и мутации как системная архитектура.',
       strengths: [
         'Даёт цельный full-stack workflow и сильнее связывает маршруты, данные и сервер.',
         'Сюда относятся React Router framework mode и Next.js App Router как реальные современные стартовые точки.',
@@ -940,9 +1179,7 @@ export interface ToolingDiagnostic {
 
 // Tooling-сценарии вынесены в чистые функции, чтобы одна и та же логика
 // работала и в React-странице, и в unit tests без дублирования.
-export function collectToolingDiagnostics(
-  config: ToolingConfig,
-): ToolingDiagnostic[] {
+export function collectToolingDiagnostics(config: ToolingConfig): ToolingDiagnostic[] {
   const diagnostics: ToolingDiagnostic[] = [];
 
   if (config.nodeVersion < 20) {
@@ -985,7 +1222,8 @@ export function collectToolingDiagnostics(
     diagnostics.push({
       status: 'warn',
       title: 'Путь отличается регистром',
-      message: 'На Windows это может незаметно проходить, а в Docker/Linux сломать сборку.',
+      message:
+        'На Windows это может незаметно проходить, а в Docker/Linux сломать сборку.',
       fix: 'Сверить реальное имя файла и import по регистру символов.',
     });
   }
@@ -994,7 +1232,8 @@ export function collectToolingDiagnostics(
     diagnostics.push({
       status: 'warn',
       title: 'Нет SPA fallback в контейнере',
-      message: 'Переход на вложенный URL напрямую отдаст 404, хотя локально роутер работает.',
+      message:
+        'Переход на вложенный URL напрямую отдаст 404, хотя локально роутер работает.',
       fix: 'Настроить сервер контейнера так, чтобы он отдавал `index.html` для клиентских маршрутов.',
     });
   }
@@ -1050,7 +1289,10 @@ export function runToolingCommand(
       return {
         status: 'error',
         title: 'Роутер заявлен в коде, но не установлен',
-        lines: ['> npm run dev', "Cannot find package 'react-router-dom' imported by route-aware module"],
+        lines: [
+          '> npm run dev',
+          "Cannot find package 'react-router-dom' imported by route-aware module",
+        ],
         fix: 'Установить пакет роутера и обновить lockfile.',
       };
     }
@@ -1087,7 +1329,10 @@ export function runToolingCommand(
       return {
         status: 'error',
         title: 'Сборка не может стартовать без ключевых зависимостей',
-        lines: ['> npm run build', 'error during build: failed to resolve entry dependencies'],
+        lines: [
+          '> npm run build',
+          'error during build: failed to resolve entry dependencies',
+        ],
         fix: 'Починить состав зависимостей и lockfile.',
       };
     }
@@ -1096,7 +1341,10 @@ export function runToolingCommand(
       return {
         status: 'error',
         title: 'Код зависит от роутера, которого нет в проекте',
-        lines: ['> npm run build', "error: failed to resolve import 'react-router-dom' from route-aware module"],
+        lines: [
+          '> npm run build',
+          "error: failed to resolve import 'react-router-dom' from route-aware module",
+        ],
         fix: 'Добавить `react-router-dom` в dependencies.',
       };
     }
@@ -1105,7 +1353,10 @@ export function runToolingCommand(
       return {
         status: 'error',
         title: 'Build падает из-за регистра пути',
-        lines: ['> npm run build', "error: Could not resolve './Components/AppShell' from src/App.tsx"],
+        lines: [
+          '> npm run build',
+          "error: Could not resolve './Components/AppShell' from src/App.tsx",
+        ],
         fix: 'Выровнять регистр файла и импорта, особенно если деплой идёт в Linux/Docker.',
       };
     }
@@ -1151,7 +1402,12 @@ export function runToolingCommand(
     return {
       status: 'success',
       title: 'Тестовый слой подключён',
-      lines: ['> npm test', 'vitest run', '✓ ecosystem diagnostics', '✓ tooling command simulation'],
+      lines: [
+        '> npm test',
+        'vitest run',
+        '✓ ecosystem diagnostics',
+        '✓ tooling command simulation',
+      ],
       fix: 'Следующий шаг: держать сценарии и регрессии в тестах, а не только вручную в браузере.',
     };
   }
@@ -1176,7 +1432,9 @@ export function runToolingCommand(
       '> docker run -p 8080:80 react-ecosystem-lab',
       'container: nginx started',
       'GET / -> 200',
-      config.usesRouter ? 'GET /pipeline -> 200 (served via index.html fallback)' : 'GET / -> 200',
+      config.usesRouter
+        ? 'GET /pipeline -> 200 (served via index.html fallback)'
+        : 'GET / -> 200',
     ],
     fix: 'Контейнерная доставка воспроизводима: локально, в CI и на сервере.',
   };

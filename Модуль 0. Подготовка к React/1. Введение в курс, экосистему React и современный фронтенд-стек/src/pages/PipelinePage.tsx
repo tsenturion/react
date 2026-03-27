@@ -99,7 +99,9 @@ export function PipelinePage() {
                           {active ? 'active' : 'off'}
                         </span>
                       </div>
-                      <p className={`mt-2 text-sm leading-6 ${active ? 'text-slate-200' : 'text-slate-500'}`}>
+                      <p
+                        className={`mt-2 text-sm leading-6 ${active ? 'text-slate-200' : 'text-slate-500'}`}
+                      >
                         {item.hint}
                       </p>
                     </button>
@@ -132,7 +134,9 @@ export function PipelinePage() {
                           {active ? 'simulated' : 'off'}
                         </span>
                       </div>
-                      <p className={`mt-2 text-sm leading-6 ${active ? 'text-rose-100' : 'text-slate-500'}`}>
+                      <p
+                        className={`mt-2 text-sm leading-6 ${active ? 'text-rose-100' : 'text-slate-500'}`}
+                      >
                         {item.hint}
                       </p>
                     </button>
@@ -149,7 +153,8 @@ export function PipelinePage() {
                   Сводка по пайплайну
                 </p>
                 <p className="mt-2 text-sm leading-6 text-slate-700">
-                  Один и тот же набор исходников ведёт себя по-разному в зависимости от выбранного слоя tooling и от того, где именно произошла ошибка.
+                  Один и тот же набор исходников ведёт себя по-разному в зависимости от
+                  выбранного слоя tooling и от того, где именно произошла ошибка.
                 </p>
               </div>
               <StatusPill tone={analysis.overall}>

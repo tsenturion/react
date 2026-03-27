@@ -16,9 +16,7 @@ export type RenderCostReport = {
   snippet: string;
 };
 
-export function buildRenderCostReport(
-  controls: RenderCostControls,
-): RenderCostReport {
+export function buildRenderCostReport(controls: RenderCostControls): RenderCostReport {
   const estimatedOperations =
     controls.items * controls.workPerItem * (controls.extraPasses + 1);
   const duplicatedSideEffects = controls.sideEffectsInRender

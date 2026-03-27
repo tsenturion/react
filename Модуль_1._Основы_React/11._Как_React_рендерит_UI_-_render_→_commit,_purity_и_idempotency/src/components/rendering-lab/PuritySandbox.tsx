@@ -1,18 +1,8 @@
 import { useMemo } from 'react';
 
-const impureRegistry: string[] = [];
+import { getImpureRegistrySnapshot, pushImpureRegistry } from './purity-registry';
 
-export function resetImpureRegistry() {
-  impureRegistry.length = 0;
-}
-
-function PureCard({
-  topic,
-  showBadge,
-}: {
-  topic: string;
-  showBadge: boolean;
-}) {
+function PureCard({ topic, showBadge }: { topic: string; showBadge: boolean }) {
   const labels = showBadge ? ['pure', topic] : [topic];
 
   return (
@@ -35,19 +25,17 @@ function PureCard({
   );
 }
 
-function ImpureCard({
-  topic,
-  pulse,
-}: {
-  topic: string;
-  pulse: number;
-}) {
+function ImpureCard({ topic, pulse }: { topic: string; pulse: number }) {
   // Эта мутация намеренно встроена в учебный sandbox.
   // Она показывает, как render перестаёт быть чистым, если трогает внешнее mutable состояние.
   const registryLength = useMemo(() => {
-    impureRegistry.push(topic);
-    return impureRegistry.length;
+    if (pulse >= 0) {
+      return pushImpureRegistry(topic);
+    }
+
+    return getImpureRegistrySnapshot().length;
   }, [pulse, topic]);
+  const recentEntries = getImpureRegistrySnapshot().slice(-4);
 
   return (
     <article className="rounded-[28px] border border-rose-200 bg-rose-50/75 p-5">
@@ -59,7 +47,7 @@ function ImpureCard({
         Внешний registry уже содержит {registryLength} записей.
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
-        {impureRegistry.slice(-4).map((label, index) => (
+        {recentEntries.map((label, index) => (
           <span
             key={`${label}-${index}`}
             className="rounded-full bg-rose-100 px-3 py-2 text-sm text-rose-900"

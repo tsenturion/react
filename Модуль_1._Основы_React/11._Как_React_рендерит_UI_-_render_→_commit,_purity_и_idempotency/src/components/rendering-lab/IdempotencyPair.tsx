@@ -1,12 +1,9 @@
-export function IdempotencyPair({
-  topic,
-}: {
-  topic: string;
-}) {
+export function IdempotencyPair({ topic }: { topic: string }) {
   const stableLabel = `${topic.toUpperCase()} · ${topic.length} символов`;
 
   // Случайность в render здесь намеренная:
   // с одинаковым input компонент начинает отдавать разный output и нарушает idempotency.
+  // eslint-disable-next-line react-hooks/purity -- учебный контрпример для темы урока
   const unstableLabel = `${topic.toUpperCase()} · ${Math.random().toFixed(4)}`;
 
   return (

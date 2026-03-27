@@ -20,7 +20,9 @@ import { ecosystemStudy } from '../lib/project-study';
 export function EcosystemPage() {
   const [taskId, setTaskId] = useState(ecosystemTasks[0].id);
   const [artifactId, setArtifactId] = useState(artifactChecks[1].id);
-  const [referencePointId, setReferencePointId] = useState(ecosystemReferencePoints[1].id);
+  const [referencePointId, setReferencePointId] = useState(
+    ecosystemReferencePoints[1].id,
+  );
 
   // Страница хранит только выбранные ids, а сами сценарии и артефакты
   // достаются из предметной модели. Так UI остаётся декларативным.
@@ -45,7 +47,9 @@ export function EcosystemPage() {
               Результат обучения
             </p>
             <p className="text-sm leading-6 text-slate-700">
-              После этой страницы вы ясно видите, где именно выполняется код, почему CRA больше не считается базовой отправной точкой и как Vite, React Router framework mode и Next.js занимают разные уровни общей системы.
+              После этой страницы вы ясно видите, где именно выполняется код, почему CRA
+              больше не считается базовой отправной точкой и как Vite, React Router
+              framework mode и Next.js занимают разные уровни общей системы.
             </p>
           </div>
         }
@@ -61,7 +65,9 @@ export function EcosystemPage() {
               Что участвует в задаче
             </h2>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
-              Выберите живую задачу из реальной разработки. Активные слои подсветятся, а ниже станет видно, где именно запускается логика и какие ошибки чаще всего возникают.
+              Выберите живую задачу из реальной разработки. Активные слои подсветятся, а
+              ниже станет видно, где именно запускается логика и какие ошибки чаще всего
+              возникают.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -171,7 +177,9 @@ export function EcosystemPage() {
               Что понимается напрямую, а что требует дополнительного шага
             </h2>
             <p className="text-sm leading-6 text-slate-600">
-              Это мини-лаборатория на границу между платформой и toolchain. Именно здесь становится ясно, почему современный React почти всегда изучается вместе с build-инструментами.
+              Это мини-лаборатория на границу между платформой и toolchain. Именно здесь
+              становится ясно, почему современный React почти всегда изучается вместе с
+              build-инструментами.
             </p>
             <div className="flex flex-wrap gap-2">
               {artifactChecks.map((item) => (
@@ -220,7 +228,9 @@ export function EcosystemPage() {
               Где находятся CRA, Vite, React Router framework mode и Next.js
             </h2>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
-              Здесь вы переключаете реальные инструменты и подходы, которые встречаются в документации и проектах. Так становится видно, что CRA, Vite и framework-first решения занимают не одно и то же место.
+              Здесь вы переключаете реальные инструменты и подходы, которые встречаются в
+              документации и проектах. Так становится видно, что CRA, Vite и
+              framework-first решения занимают не одно и то же место.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">

@@ -25,5 +25,4 @@ export const stackBadges = [
   `Nginx ${stackVersions.nginxImage}`,
 ] as const;
 
-export const stackSummary =
-  `React ${stackVersions.react}, React Router DOM ${stackVersions.reactRouterDom}, Vite ${stackVersions.vite}, @vitejs/plugin-react ${stackVersions.viteReactPlugin}, Tailwind CSS ${stackVersions.tailwindcss}, Vitest ${stackVersions.vitest} и контейнерный запуск через Node ${stackVersions.nodeImage} + Nginx ${stackVersions.nginxImage}.`;
+export const stackSummary = `React ${stackVersions.react}, React Router DOM ${stackVersions.reactRouterDom}, Vite ${stackVersions.vite}, @vitejs/plugin-react ${stackVersions.viteReactPlugin}, Tailwind CSS ${stackVersions.tailwindcss}, Vitest ${stackVersions.vitest} и контейнерный запуск через Node ${stackVersions.nodeImage} + Nginx ${stackVersions.nginxImage}.`;

@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
-import { AppLayout, labs } from './App';
+import { AppLayout } from './App';
+import { labs } from './labs';
 
 // Маршруты вынесены отдельно от layout, чтобы в коде было явно видно:
 // React Router управляет URL и подставляет нужную лабораторию через общий shell.

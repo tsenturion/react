@@ -110,7 +110,9 @@ export function DeliveryModesPage() {
                         {active ? 'required' : 'off'}
                       </span>
                     </div>
-                    <p className={`mt-2 text-sm leading-6 ${active ? 'text-slate-200' : 'text-slate-500'}`}>
+                    <p
+                      className={`mt-2 text-sm leading-6 ${active ? 'text-slate-200' : 'text-slate-500'}`}
+                    >
                       {item.hint}
                     </p>
                   </button>
@@ -153,7 +155,9 @@ export function DeliveryModesPage() {
                       {mode.score}
                     </span>
                   </div>
-                  <p className={`mt-3 text-sm leading-6 ${mode.id === recommendation.winner.id ? 'text-slate-200' : 'text-slate-600'}`}>
+                  <p
+                    className={`mt-3 text-sm leading-6 ${mode.id === recommendation.winner.id ? 'text-slate-200' : 'text-slate-600'}`}
+                  >
                     {mode.summary}
                   </p>
                   <div className="mt-4 space-y-2">

@@ -100,8 +100,8 @@ export function ToolingPage() {
                 <span className="font-semibold text-slate-900">
                   Vite {stackVersions.vite}
                 </span>{' '}
-                считается рабочим на Node `20` и `22`. Значения `16` и `18`
-                здесь показывают устаревшее окружение и типичный отказ toolchain.
+                считается рабочим на Node `20` и `22`. Значения `16` и `18` здесь
+                показывают устаревшее окружение и типичный отказ toolchain.
               </p>
             </div>
 
@@ -177,7 +177,10 @@ export function ToolingPage() {
             </div>
 
             <div className="grid gap-4 xl:grid-cols-2">
-              <CodeBlock label="package.json preview" code={buildPackagePreview(config)} />
+              <CodeBlock
+                label="package.json preview"
+                code={buildPackagePreview(config)}
+              />
               <CodeBlock label="nginx/docker preview" code={buildDockerPreview(config)} />
             </div>
           </div>
@@ -190,10 +193,11 @@ export function ToolingPage() {
           items={
             diagnostics.length > 0
               ? diagnostics.map(
-                  (item) =>
-                    `${item.title}: ${item.message} Исправление: ${item.fix}`,
+                  (item) => `${item.title}: ${item.message} Исправление: ${item.fix}`,
                 )
-              : ['Конфигурация выглядит согласованной: локальный запуск, build, tests и Docker работают как единая система.']
+              : [
+                  'Конфигурация выглядит согласованной: локальный запуск, build, tests и Docker работают как единая система.',
+                ]
           }
         />
         <ListBlock

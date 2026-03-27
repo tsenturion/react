@@ -1,5 +1,5 @@
 services:
-  react-root-dom-lab:
+  react-render-commit-purity-lab:
     build:
       context: .
       dockerfile: Dockerfile

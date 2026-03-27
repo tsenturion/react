@@ -1,10 +1,6 @@
 import type { StatusTone } from './learning-model';
 
-export type RenderTrigger =
-  | 'local-state'
-  | 'parent-state'
-  | 'prop-change'
-  | 'same-input';
+export type RenderTrigger = 'local-state' | 'parent-state' | 'prop-change' | 'same-input';
 
 export type RenderTreeNode = {
   id: string;
@@ -30,16 +26,15 @@ function countTree(nodes: RenderTreeNode): { affected: number; changed: number }
 
   return {
     affected:
-      (nodes.rerendered ? 1 : 0) + childCounts.reduce((sum, entry) => sum + entry.affected, 0),
+      (nodes.rerendered ? 1 : 0) +
+      childCounts.reduce((sum, entry) => sum + entry.affected, 0),
     changed:
       (nodes.outputChanged ? 1 : 0) +
       childCounts.reduce((sum, entry) => sum + entry.changed, 0),
   };
 }
 
-export function buildRenderTriggerReport(
-  trigger: RenderTrigger,
-): RenderTriggerReport {
+export function buildRenderTriggerReport(trigger: RenderTrigger): RenderTriggerReport {
   const tree: RenderTreeNode =
     trigger === 'local-state'
       ? {
@@ -66,7 +61,8 @@ export function buildRenderTriggerReport(
                 {
                   id: 'lesson-row',
                   label: 'LessonRow',
-                  reason: 'Потомки локального state-узла тоже получили новый render проход.',
+                  reason:
+                    'Потомки локального state-узла тоже получили новый render проход.',
                   rerendered: true,
                   outputChanged: true,
                 },
@@ -78,14 +74,16 @@ export function buildRenderTriggerReport(
         ? {
             id: 'app',
             label: 'AppShell',
-            reason: 'State изменился в родителе, поэтому React снова вызывает весь поддеревом ниже.',
+            reason:
+              'State изменился в родителе, поэтому React снова вызывает весь поддеревом ниже.',
             rerendered: true,
             outputChanged: true,
             children: [
               {
                 id: 'toolbar',
                 label: 'Toolbar',
-                reason: 'Toolbar был вызван снова, даже если визуально почти не изменился.',
+                reason:
+                  'Toolbar был вызван снова, даже если визуально почти не изменился.',
                 rerendered: true,
                 outputChanged: false,
               },
@@ -134,14 +132,16 @@ export function buildRenderTriggerReport(
           : {
               id: 'app',
               label: 'AppShell',
-              reason: 'React снова вызвал компоненты, но входные данные по сути остались прежними.',
+              reason:
+                'React снова вызвал компоненты, но входные данные по сути остались прежними.',
               rerendered: true,
               outputChanged: false,
               children: [
                 {
                   id: 'toolbar',
                   label: 'Toolbar',
-                  reason: 'Компонент был вызван, но при чистом коде вернул тот же результат.',
+                  reason:
+                    'Компонент был вызван, но при чистом коде вернул тот же результат.',
                   rerendered: true,
                   outputChanged: false,
                 },

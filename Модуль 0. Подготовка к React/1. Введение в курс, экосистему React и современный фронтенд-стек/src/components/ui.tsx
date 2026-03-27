@@ -93,25 +93,28 @@ export function MetricCard({
         className={clsx(
           'mt-2 break-words font-bold tracking-tight',
           tone === 'dark' && 'text-white',
-          value.length > 42 ? 'text-base leading-7 sm:text-lg' : value.length > 18 ? 'text-xl sm:text-2xl' : 'text-3xl',
+          value.length > 42
+            ? 'text-base leading-7 sm:text-lg'
+            : value.length > 18
+              ? 'text-xl sm:text-2xl'
+              : 'text-3xl',
         )}
       >
         {value}
       </p>
-      <p className={clsx('mt-2 text-sm leading-6', tone === 'dark' ? 'text-slate-300' : 'text-slate-600')}>
+      <p
+        className={clsx(
+          'mt-2 text-sm leading-6',
+          tone === 'dark' ? 'text-slate-300' : 'text-slate-600',
+        )}
+      >
         {hint}
       </p>
     </div>
   );
 }
 
-export function ListBlock({
-  title,
-  items,
-}: {
-  title: string;
-  items: string[];
-}) {
+export function ListBlock({ title, items }: { title: string; items: string[] }) {
   return (
     <div className="space-y-3">
       <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
@@ -131,13 +134,7 @@ export function ListBlock({
   );
 }
 
-export function CodeBlock({
-  label,
-  code,
-}: {
-  label: string;
-  code: string;
-}) {
+export function CodeBlock({ label, code }: { label: string; code: string }) {
   return (
     <div className="panel-dark p-5">
       <div className="mb-3 flex items-center justify-between gap-3">

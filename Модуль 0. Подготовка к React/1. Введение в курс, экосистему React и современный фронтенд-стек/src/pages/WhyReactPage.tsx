@@ -95,7 +95,9 @@ export function WhyReactPage() {
                         {active ? 'on' : 'off'}
                       </span>
                     </div>
-                    <p className={`mt-2 text-sm leading-6 ${active ? 'text-slate-200' : 'text-slate-500'}`}>
+                    <p
+                      className={`mt-2 text-sm leading-6 ${active ? 'text-slate-200' : 'text-slate-500'}`}
+                    >
                       {feature.hint}
                     </p>
                   </button>
@@ -140,7 +142,10 @@ export function WhyReactPage() {
             />
 
             <div className="grid gap-4 xl:grid-cols-2">
-              <CodeBlock label="Императивный DOM-подход" code={analysis.imperativeSnippet} />
+              <CodeBlock
+                label="Императивный DOM-подход"
+                code={analysis.imperativeSnippet}
+              />
               <CodeBlock label="React-подход" code={analysis.reactSnippet} />
             </div>
           </div>
@@ -148,7 +153,10 @@ export function WhyReactPage() {
       </Panel>
 
       <Panel className="grid gap-6 xl:grid-cols-2">
-        <ListBlock title="Типичные ошибки без компонентной модели" items={analysis.mistakes} />
+        <ListBlock
+          title="Типичные ошибки без компонентной модели"
+          items={analysis.mistakes}
+        />
         <ListBlock title="Что React даёт на практике" items={analysis.practicalWins} />
       </Panel>
 
