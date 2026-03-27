@@ -292,14 +292,14 @@
 
 ## Модуль 15. Итоговые проекты
 
-### 65. Базовые проекты
+### 65. Базовый проект
 
 (Tic-Tac-Toe, фильтруемая таблица данных, форма регистрации с валидацией; закрепление компонентов, props, state, lifting state, derived state, forms, keys, accessibility и базовой архитектуры; проекты должны показывать не просто готовый UI, а логику поведения, границы решений и типичные ошибки)
 
-### 66. Средние проекты
+### 66. Средний проект
 
 (CRUD-приложение, dashboard с серверными данными, router + server state, тесты, auth flow, loading/error states, mutations, protected routes; здесь должны соединяться архитектура приложения, работа с API, роутинг, кэширование, тестирование, оптимистические обновления и устойчивость UI)
 
-### 67. Продвинутые и full-stack проекты
+### 67. Продвинутый full-stack проект
 
 (e-commerce SPA, performance lab, full-stack React приложение с SSR, streaming, Server Components, Server Functions/actions, compiler-aware optimization, production polish; проектная траектория от реалистичного SPA к современному full-stack React; в таких проектах должно быть видно не только “что работает”, но и почему выбранная архитектура лучше альтернатив в данном контексте)
